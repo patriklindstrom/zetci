@@ -2,9 +2,11 @@
 name = "zet-cmder"
 version = "0.1.0"
 edition = "2018"
+authors = ["Patrik Lindstrom <patrik.lindstrom.dev>"]
 
 # See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
 
 [dependencies]
-clap = "3.0.0-beta.2"
+clap = {version = "3.0.0-beta.2", features = ["yaml"]}
+csv = "1.0.0-beta.3"
 

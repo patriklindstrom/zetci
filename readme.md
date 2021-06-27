@@ -57,7 +57,9 @@ Compete with sql databases
 ### Sort output file
 ### compress large files that has key
 ### Guess format of datafiles when you use keys
-
+## Todos
+checkout right hash algoritmh. The default one for hashmap is not great for
+small och large date. 
 # How to contribute
 ## These are the groundrules
 
