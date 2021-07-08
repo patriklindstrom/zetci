@@ -48,20 +48,16 @@ fn main() {
         let files: Vec<_> = matches.values_of("FILES").unwrap().collect();
         for f in files {
             println!("file : {}", f);
-        }
-        match matches.subcommand_name() {
-            Some("union") => println!("'zet-cmder union' was used"),
-            Some("intersect") => println!("'zet-cmder intersect' was used"),
-            None => println!("No subcommand was used"),
-            _ => println!("Some other subcommand was used"),
-        }
-    }
-    let files: Vec<_> = matches.values_of("FILES").unwrap().collect();
-    for f in files {
-        println!("file : {}", f);
-        if let Err(err) = read_data_file(f.to_string()) {
-            println!("{}", err);
-            process::exit(1);
+            if let Err(err) = read_data_file(f.to_string()) {
+                println!("{}", err);
+                process::exit(1);
+            }
+            match matches.subcommand_name() {
+                Some("union") => println!("'zet-cmder union' was used"),
+                Some("intersect") => println!("'zet-cmder intersect' was used"),
+                None => println!("No subcommand was used"),
+                _ => println!("Some other subcommand was used"),
+            }
         }
     }
 }
