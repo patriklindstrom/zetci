@@ -53,6 +53,11 @@ fn main() {
                 process::exit(1);
             }
             match matches.subcommand_name() {
+                // TODO: Add function that takes array of hashmaps with data from files and
+                // performs the operation union on them. move function later to library.
+                // TODO: The array of function needs to be a struct perhaps with meta data about
+                // the data like which one is the biggest, cardinality and perhaps others so the
+                // rudimentary queriy optimizer gets relevant info.
                 Some("union") => println!("'zet-cmder union' was used"),
                 Some("intersect") => println!("'zet-cmder intersect' was used"),
                 None => println!("No operator like union or intersect was used"),
