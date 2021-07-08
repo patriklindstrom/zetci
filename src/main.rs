@@ -55,8 +55,11 @@ fn main() {
             match matches.subcommand_name() {
                 Some("union") => println!("'zet-cmder union' was used"),
                 Some("intersect") => println!("'zet-cmder intersect' was used"),
-                None => println!("No subcommand was used"),
-                _ => println!("Some other subcommand was used"),
+                None => println!("No operator like union or intersect was used"),
+                _ => println!(
+                    "unknown subcommand used {}. Use --help to see valid operators ",
+                    matches.subcommand_name()
+                ),
             }
         }
     }
