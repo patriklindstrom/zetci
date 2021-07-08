@@ -57,7 +57,7 @@ fn main() {
                 Some("intersect") => println!("'zet-cmder intersect' was used"),
                 None => println!("No operator like union or intersect was used"),
                 _ => println!(
-                    "unknown subcommand used {}. Use --help to see valid operators ",
+                    "unknown subcommand used {:?}. Use --help to see valid operators ",
                     matches.subcommand_name()
                 ),
             }
