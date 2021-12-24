@@ -35,7 +35,7 @@ fn get_current_dir() -> String {
     return path.display().to_string();
 }
 fn main() {
-    println!("Hello, world!");
+    println!("Hello,funäsdalen !");
     println!("The current directory is {}", get_current_dir());
     let clap_config_yaml = load_yaml!("clap_config.yml");
     let app = App::from(clap_config_yaml);

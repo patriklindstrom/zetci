@@ -63,3 +63,5 @@ small och large date.
 # How to contribute
 ## These are the groundrules
 
+# Dev notes
+to test params cargo run -- --files ./testdata/fee.csv ./testdata/foo.csv
