@@ -65,3 +65,4 @@ small och large date.
 
 # Dev notes
 to test params cargo run -- --files ./testdata/fee.csv ./testdata/foo.csv
+./target/debug/zet-cmder   --files './testdata/fee.csv' './testdata/foo.csv' union

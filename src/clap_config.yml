@@ -28,10 +28,14 @@ args:
         help: Sets the level of verbosity
 subcommands:
     - union:
+        short: u
+        long: union
         about: union set operator between files, all unique rows for all files
         version: "0.1"
         author: Patrik Lindstrom. <patrik.lindstrom.dev>
     - intersect:
+        short: i
+        long: intersection
         about: intersect set operator between files, what is commont in all files
         version: "0.1"
         author: Patrik Lindstrom. <patrik.lindstrom.dev>        
