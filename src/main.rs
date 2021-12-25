@@ -43,6 +43,9 @@ fn main() {
     if let Some(i) = matches.value_of("OUTPUT") {
         println!("Value for output: {}", i);
     }
+    if matches.is_present("UNION") {
+        println!("operation is Union")
+    }
     if matches.is_present("FILES") {
         // "$  -f filename1.csv filename2.csv" was run
         let files: Vec<_> = matches.values_of("FILES").unwrap().collect();
@@ -52,20 +55,11 @@ fn main() {
                 println!("{}", err);
                 process::exit(1);
             }
-            match matches.subcommand_name() {
                 // TODO: Add function that takes array of hashmaps with data from files and
                 // performs the operation union on them. move function later to library.
                 // TODO: The array of function needs to be a struct perhaps with meta data about
                 // the data like which one is the biggest, cardinality and perhaps others so the
                 // rudimentary queriy optimizer gets relevant info.
-                Some("union") => println!("'zet-cmder union' was used"),
-                Some("intersect") => println!("'zet-cmder intersect' was used"),
-                None => println!("No operator like union or intersect was used"),
-                _ => println!(
-                    "unknown subcommand used {:?}. Use --help to see valid operators ",
-                    matches.subcommand_name()
-                ),
-            }
         }
     }
 }

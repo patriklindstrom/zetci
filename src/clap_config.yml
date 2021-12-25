@@ -9,7 +9,6 @@ args:
         takes_value: true
         multiple: true
         min_values: 1
-        about: all files that should be used with set operators  
     - config:
         short: c
         long: config
@@ -19,26 +18,19 @@ args:
     - OUTPUT:
         short: o
         long: output
-        about: Sets the output file to for the result
         required: false
         takes_value: true
     - verbose:
         short: v
         multiple: true
         help: Sets the level of verbosity
-subcommands:
-    - union:
+    - UNION:
         short: u
         long: union
-        about: union set operator between files, all unique rows for all files
         takes_value: false
-        version: "0.1"
-        author: Patrik Lindstrom. <patrik.lindstrom.dev>
-    - intersect:
+        help: Takes the unique rows of two or more files.
+    - INTERSECT:
         short: i
         long: intersection
-        about: intersect set operator between files, what is common in all files
         takes_value: false
-        version: "0.1"
-        author: Patrik Lindstrom. <patrik.lindstrom.dev>        
-
+        help: Gets the rows that exist in all of the files.
