@@ -1,4 +1,4 @@
-g*tl;dr This cmd program can compare textfiles and find what rows are the
+**tl;dr This cmd program can compare textfiles and find what rows are the
 same or differ**
 
 # Readme zet-cmd
