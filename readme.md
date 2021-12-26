@@ -66,3 +66,9 @@ small och large date.
 # Dev notes
 to test params cargo run -- --files ./testdata/fee.csv ./testdata/foo.csv
 ./target/debug/zet-cmder   --files './testdata/fee.csv' './testdata/foo.csv' union
+
+                // TODO: Add function that takes array of hashmaps with data from files and
+                // performs the operation union on them. move function later to library.
+                // TODO: The array of function needs to be a struct perhaps with meta data about
+                // the data like which one is the biggest, cardinality and perhaps others so the
+                // rudimentary queriy optimizer gets relevant info.

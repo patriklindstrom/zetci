@@ -13,7 +13,7 @@ use std::error::Error;
 use std::fs::File;
 use std::process;
 
-fn read_data_file(file_path: String) -> Result<(), Box<dyn Error>> {
+fn read_data_file(file_path: String) -> Result<(HashMap<String,String>), Box<dyn Error>> {
     // Build the CSV reader and iterate over each record.
     // let file_path: String = "/home/patrik/git/zet-cmder/testdata/fee.csv".to_string();
     let file = File::open(file_path)?;
@@ -28,7 +28,7 @@ fn read_data_file(file_path: String) -> Result<(), Box<dyn Error>> {
         let value: String = record.as_slice().to_string();
         set.insert(record.get(0).unwrap().to_string(), value);
     }
-    Ok(())
+    Ok((set))
 }
 fn get_current_dir() -> String {
     let path = env::current_dir().unwrap();
@@ -43,23 +43,16 @@ fn main() {
     if let Some(i) = matches.value_of("OUTPUT") {
         println!("Value for output: {}", i);
     }
-    if matches.is_present("UNION") {
-        println!("operation is Union")
-    }
     if matches.is_present("FILES") {
         // "$  -f filename1.csv filename2.csv" was run
         let files: Vec<_> = matches.values_of("FILES").unwrap().collect();
         for f in files {
             println!("file : {}", f);
-            if let Err(err) = read_data_file(f.to_string()) {
-                println!("{}", err);
-                process::exit(1);
-            }
-                // TODO: Add function that takes array of hashmaps with data from files and
-                // performs the operation union on them. move function later to library.
-                // TODO: The array of function needs to be a struct perhaps with meta data about
-                // the data like which one is the biggest, cardinality and perhaps others so the
-                // rudimentary queriy optimizer gets relevant info.
+            let mut  dset=  read_data_file(f.to_string()) ;
         }
+    }
+
+    if matches.is_present("UNION") {
+        println!("operation is Union")
     }
 }
