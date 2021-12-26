@@ -49,7 +49,7 @@ fn main() {
         for f in files {
             println!("file : {}", f);
             let dset=  read_data_file(f.to_string()).expect("Cant handle file") ;
-             println!("Hashmap's_length_comes out to_be {:?}",dset.len());
+             println!("Hashmap's_length_comes for {} is {:?}",f.to_string(),dset.len());
             //match dset {
             //    Ok(res_set)=> println!("Hashmap's_length_comes out to_be {:?}",res_set.len()),
             //    Err(e)=> println!("Error"),
