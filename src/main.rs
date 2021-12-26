@@ -13,7 +13,7 @@ use std::error::Error;
 use std::fs::File;
 use std::process;
 
-fn read_data_file(file_path: String) -> Result<(HashMap<String,String>), Box<dyn Error>> {
+fn read_data_file(file_path: String) -> Result<HashMap<String,String>, Box<dyn Error>> {
     // Build the CSV reader and iterate over each record.
     // let file_path: String = "/home/patrik/git/zet-cmder/testdata/fee.csv".to_string();
     let file = File::open(file_path)?;
@@ -28,7 +28,7 @@ fn read_data_file(file_path: String) -> Result<(HashMap<String,String>), Box<dyn
         let value: String = record.as_slice().to_string();
         set.insert(record.get(0).unwrap().to_string(), value);
     }
-    Ok((set))
+    Ok(set)
 }
 fn get_current_dir() -> String {
     let path = env::current_dir().unwrap();
