@@ -48,7 +48,12 @@ fn main() {
         let files: Vec<_> = matches.values_of("FILES").unwrap().collect();
         for f in files {
             println!("file : {}", f);
-            let mut  dset=  read_data_file(f.to_string()) ;
+            let mut  dset=  read_data_file(f.to_string()).expect("Cant handle file") ;
+             println!("Hashmap's_length_comes out to_be {:?}",dset.len())
+            match dset {
+                Ok(res_set)=> println!("Hashmap's_length_comes out to_be {:?}",res_set.len()),
+                Err(e)=> println!("Error"),
+            }
         }
     }
 
