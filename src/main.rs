@@ -44,7 +44,6 @@ fn main() {
         println!("Value for output: {}", i);
     }
     if matches.is_present("FILES") {
-        // "$  -f filename1.csv filename2.csv" was run
         let files: Vec<_> = matches.values_of("FILES").unwrap().collect();
         let mut zets = Vec::with_capacity(files.len());
         for f in files {
@@ -52,15 +51,11 @@ fn main() {
             let dset=  read_data_file(f.to_string()).expect("Cant handle file") ;
             println!("Hashmap's_length_comes for {} is {:?}",f.to_string(),dset.len());
             zets.push(dset);
-            //match dset {
-            //    Ok(res_set)=> println!("Hashmap's_length_comes out to_be {:?}",res_set.len()),
-            //    Err(e)=> println!("Error"),
-            //}
         }
         println!("Number of Hashmapis is {:?}",zets.len());
-    }
-
     if matches.is_present("UNION") {
-        println!("operation is Union")
+        println!("operation is Union");
+        zets.sort_by(|a,b| a.len().cmp(&b.len()));
+    }
     }
 }
