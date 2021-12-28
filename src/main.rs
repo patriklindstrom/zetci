@@ -11,7 +11,6 @@ use std::collections::HashMap;
 use std::env;
 use std::error::Error;
 use std::fs::File;
-use std::process;
 
 fn read_data_file(file_path: String) -> Result<HashMap<String,String>, Box<dyn Error>> {
     // Build the CSV reader and iterate over each record.
@@ -55,7 +54,13 @@ fn main() {
         println!("Number of Hashmapis is {:?}",zets.len());
     if matches.is_present("UNION") {
         println!("operation is Union");
-        zets.sort_by(|a,b| a.len().cmp(&b.len()));
+        // Sort Descending on size
+        zets.sort_by(|a,b| b.len().cmp(&a.len()));
+        for z in zets {
+            println!("{:?}",z.len())
+        
+
+        }
     }
     }
 }
