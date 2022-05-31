@@ -60,8 +60,16 @@ fn main() {
             println!("operation is Union");
             // Sort Descending on size
             zets.sort_by(|a, b| b.len().cmp(&a.len()));
-            for z in zets {
-                println!("Nr of Rows in Hashmap is {:?}", z.len())
+            let first_z = zets.first();
+            match first_z {
+                Some(r) => println!("Length of first_z is {:?}", r.len()),
+                None => println!("Error in first_z"),
+            }
+            for z in zets.iter() {
+                println!("Nr of Rows in Hashmap is {:?}", z.len());
+                for r in z {
+                    // now check if this r row exist in
+                }
             }
         }
     }
