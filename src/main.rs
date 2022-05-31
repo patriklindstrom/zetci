@@ -1,5 +1,5 @@
 // To test this run
-// cargo run --  -f "foo.csv" "fum.csv" -o "test.csv" union
+// cargo run --  -f "foo.csv" "fum.csv" -o "test.csv" --union
 
 // cargo run --  --files "../testdata/foo.csv" "../testdata/fum.csv" -o
 // ../testdata/union_output.csv union
@@ -12,7 +12,7 @@ use std::env;
 use std::error::Error;
 use std::fs::File;
 
-fn read_data_file(file_path: String) -> Result<HashMap<String,String>, Box<dyn Error>> {
+fn read_data_file(file_path: String) -> Result<HashMap<String, String>, Box<dyn Error>> {
     // Build the CSV reader and iterate over each record.
     // let file_path: String = "/home/patrik/git/zet-cmder/testdata/fee.csv".to_string();
     let file = File::open(file_path)?;
@@ -47,20 +47,22 @@ fn main() {
         let mut zets = Vec::with_capacity(files.len());
         for f in files {
             println!("file : {}", f);
-            let dset=  read_data_file(f.to_string()).expect("Cant handle file") ;
-            println!("Hashmap's_length_comes for {} is {:?}",f.to_string(),dset.len());
+            let dset = read_data_file(f.to_string()).expect("Cant handle file");
+            println!(
+                "Hashmap's_length_comes for {} is {:?}",
+                f.to_string(),
+                dset.len()
+            );
             zets.push(dset);
         }
-        println!("Number of Hashmapis is {:?}",zets.len());
-    if matches.is_present("UNION") {
-        println!("operation is Union");
-        // Sort Descending on size
-        zets.sort_by(|a,b| b.len().cmp(&a.len()));
-        for z in zets {
-            println!("{:?}",z.len())
-        
-
+        println!("Number of Hashmapis is {:?}", zets.len());
+        if matches.is_present("UNION") {
+            println!("operation is Union");
+            // Sort Descending on size
+            zets.sort_by(|a, b| b.len().cmp(&a.len()));
+            for z in zets {
+                println!("Nr of Rows in Hashmap is {:?}", z.len())
+            }
         }
-    }
     }
 }
