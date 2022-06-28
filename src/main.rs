@@ -69,6 +69,7 @@ fn main() {
                 println!("Nr of Rows in Hashmap is {:?}", z.len());
                 for r in z {
                     // now check if this r row exist in
+                    println!("r exist or not it is now: {:?}", r)
                 }
             }
         }
