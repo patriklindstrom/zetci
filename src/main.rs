@@ -65,7 +65,8 @@ fn main() {
                 Some(r) => println!("Length of first_z is {:?}", r.len()),
                 None => println!("Error in first_z"),
             }
-            for z in zets.iter() {
+            let z_union_canditates = &zets[1..];
+            for z in z_union_canditates.iter() {
                 println!("Nr of Rows in Hashmap is {:?}", z.len());
                 for r in z {
                     // now check if this r row exist in
