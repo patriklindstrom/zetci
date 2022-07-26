@@ -62,7 +62,7 @@ fn main() {
             zets.sort_by(|a, b| b.len().cmp(&a.len()));
             let first_z = zets.first();
             match first_z {
-                Some(r) => println!("Length of first_z is {:?}", r.len()),
+                Some(first_z_r) => println!("Length of first_z is {:?}", first_z_r.len()),
                 None => println!("Error in first_z"),
             }
             let z_union_canditates = &zets[1..];
@@ -70,7 +70,21 @@ fn main() {
                 println!("Nr of Rows in Hashmap is {:?}", z.len());
                 for r in z {
                     // now check if this r row exist in
-                    println!("r exist or not it is now: {:?}", r)
+                    println!("r exist or not it is now: {:?}", r);
+                    println!(
+                        "lets try a compare with biggest file and {:?}, {:?} ",
+                        r.0, r.1
+                    );
+                    match first_z {
+                        Some(fz) => {
+                            if fz.contains_key(r.0) {
+                                println!("Key existed for {:?},{:?}", r.0, r.1)
+                            } else {
+                                println!("Key NOT :existed for {:?},{:?}", r.0, r.1)
+                            }
+                        }
+                        None => println!("Error in first_z"),
+                    }
                 }
             }
         }
