@@ -80,11 +80,12 @@ fn main() {
                             if fz.contains_key(r.0) {
                                 println!("Key existed for {:?},{:?}", r.0, r.1)
                             } else {
-                                println!("Key NOT :existed for {:?},{:?}", r.0, r.1)
+                                println!("Key NOT :existed for {:?},{:?}", r.0, r.1);
+                                fz.to_owned().insert(r.0.to_owned(), r.1.to_owned());
                             }
                         }
                         None => println!("Error in first_z"),
-                    }
+                    };
                 }
             }
         }
