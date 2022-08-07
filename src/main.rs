@@ -33,6 +33,9 @@ fn get_current_dir() -> String {
     let path = env::current_dir().unwrap();
     return path.display().to_string();
 }
+fn union_operator(vec_of_sets: Vec<String>) -> String {
+    unimplemented!();
+}
 fn main() {
     println!("Hello,funäsdalen !");
     println!("The current directory is {}", get_current_dir());
