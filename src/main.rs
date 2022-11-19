@@ -92,5 +92,8 @@ fn main() {
                 }
             }
         }
+        if matches.is_present("INTERSECTION") {
+            println!("Intersection was choosen");
+        }
     }
 }
