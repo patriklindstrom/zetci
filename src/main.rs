@@ -63,10 +63,10 @@ fn main() {
             println!("operation is Union");
             // Sort Descending on size
             zets.sort_by(|a, b| b.len().cmp(&a.len()));
-            let first_z = zets.first();
-            match first_z {
-                Some(first_z_r) => println!("Length of first_z is {:?}", first_z_r.len()),
-                None => println!("Error in first_z"),
+            let compare_z = zets.first();
+            match compare_z {
+                Some(compare_z_r) => println!("Length of compare_z is {:?}", compare_z_r.len()),
+                None => println!("Error in compare_z"),
             }
             let z_union_canditates = &zets[1..];
             for z in z_union_canditates.iter() {
@@ -78,16 +78,13 @@ fn main() {
                         "lets try a compare with biggest file and {:?}, {:?} ",
                         r.0, r.1
                     );
-                    match first_z {
+                    match compare_z {
                         Some(fz) => {
                             if fz.contains_key(r.0) {
-                                println!("Key existed for {:?},{:?}", r.0, r.1)
-                            } else {
-                                println!("Key NOT :existed for {:?},{:?}", r.0, r.1);
-                                fz.to_owned().insert(r.0.to_owned(), r.1.to_owned());
+                                println!("{:?}", r.1)
                             }
                         }
-                        None => println!("Error in first_z"),
+                        None => println!("Error in compare_z"),
                     };
                 }
             }
