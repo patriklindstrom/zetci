@@ -63,7 +63,7 @@ fn main() {
             println!("operation is Union");
             // Sort Descending on size
             zets.sort_by(|a, b| b.len().cmp(&a.len()));
-            let compare_z = zets.first();
+            let mut compare_z = zets.first();
             let mut temp_compare_z: HashMap<String, String> = HashMap::new();
             match compare_z {
                 Some(compare_z_r) => println!("Length of compare_z is {:?}", compare_z_r.len()),
@@ -89,6 +89,10 @@ fn main() {
                         None => println!("Error in compare_z"),
                     };
                 }
+                match compare_z {
+                    Some(tc) => tc = &temp_compare_z,
+                    None => println!("Error in temp_compare_z"),
+                };
             }
         }
         if matches.is_present("INTERSECTION") {

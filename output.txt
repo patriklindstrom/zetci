@@ -1,0 +1,74 @@
+Hello,funäsdalen !
+The current directory is /home/patrik/git/zet-cmder
+file : ./testdata/fee.csv
+StringRecord(["4", "Olle", "Lindström", "3000", "10 min 22 s", "Na"])
+Some("4")
+StringRecord(["5", "Emma", "Olsson", "2000 m", "11 min 25 s", "Nike"])
+Some("5")
+StringRecord(["6", "Anna", "Lindström", "1000 m", "8 min 31 s", "Adidas"])
+Some("6")
+StringRecord(["7", "Hampus", "Olsson", "1000 m", "8 min 15 s", "Nike"])
+Some("7")
+StringRecord(["100", "Fredrik", "Döberl", "3564 m", "15 min 3 s", "Military boots"])
+Some("100")
+StringRecord(["101", "Andreas", "Gunnarsson", "4000 m", " \"20 min 40 s\"", " \"Ecco Tactical\""])
+Some("101")
+StringRecord(["102", "Anna", "Gunnarsson", "2000", "11 min 28 s", "Nike"])
+Some("102")
+StringRecord(["104", "Gunde", "Swan", "10000", "45 min 10 s", "Nike"])
+Some("104")
+Hashmap's_length_comes for ./testdata/fee.csv is 8
+file : ./testdata/foo.csv
+StringRecord(["2", "Bertil", "Svensson", "6000 m", "27 min 5 s", "Adidas"])
+Some("2")
+StringRecord(["3", "Cecilia", "Svensson", "2000 m", "9 min 15 s", "Nike"])
+Some("3")
+StringRecord(["4", "Olle", "Lindström", "3000", "10 min 22 s", "Na"])
+Some("4")
+StringRecord(["5", "Emma", "Olsson", "2000 m", "11 min 25 s", "Nike"])
+Some("5")
+Hashmap's_length_comes for ./testdata/foo.csv is 4
+file : ./testdata/fum.csv
+StringRecord(["1", "Adam", "Svensson", "3000 m", "12 min 30 s", "Nike"])
+Some("1")
+StringRecord(["2", "Bertil", "Svensson", "6000 m", "27 min 5 s", "Adidas"])
+Some("2")
+StringRecord(["3", "Cecilia", "Svensson", "2000 m", "9 min 15 s", "Nike"])
+Some("3")
+StringRecord(["4", "Olle", "Lindström", "3000", "10 min 22 s", "Na"])
+Some("4")
+StringRecord(["5", "Emma", "Olsson", "2000 m", "11 min 25 s", "Nike"])
+Some("5")
+StringRecord(["6", "Anna", "Lindström", "1000 m", "8 min 31 s", "Adidas"])
+Some("6")
+Hashmap's_length_comes for ./testdata/fum.csv is 6
+Number of Hashmapis is 3
+operation is Union
+Length of compare_z is 8
+Nr of Rows in Hashmap is 6
+r exist or not it is now: ("1", "1AdamSvensson3000 m12 min 30 sNike")
+lets try a compare with biggest file and "1", "1AdamSvensson3000 m12 min 30 sNike" 
+r exist or not it is now: ("2", "2BertilSvensson6000 m27 min 5 sAdidas")
+lets try a compare with biggest file and "2", "2BertilSvensson6000 m27 min 5 sAdidas" 
+r exist or not it is now: ("3", "3CeciliaSvensson2000 m9 min 15 sNike")
+lets try a compare with biggest file and "3", "3CeciliaSvensson2000 m9 min 15 sNike" 
+r exist or not it is now: ("4", "4OlleLindström300010 min 22 sNa")
+lets try a compare with biggest file and "4", "4OlleLindström300010 min 22 sNa" 
+"4OlleLindström300010 min 22 sNa"
+r exist or not it is now: ("6", "6AnnaLindström1000 m8 min 31 sAdidas")
+lets try a compare with biggest file and "6", "6AnnaLindström1000 m8 min 31 sAdidas" 
+"6AnnaLindström1000 m8 min 31 sAdidas"
+r exist or not it is now: ("5", "5EmmaOlsson2000 m11 min 25 sNike")
+lets try a compare with biggest file and "5", "5EmmaOlsson2000 m11 min 25 sNike" 
+"5EmmaOlsson2000 m11 min 25 sNike"
+Nr of Rows in Hashmap is 4
+r exist or not it is now: ("5", "5EmmaOlsson2000 m11 min 25 sNike")
+lets try a compare with biggest file and "5", "5EmmaOlsson2000 m11 min 25 sNike" 
+"5EmmaOlsson2000 m11 min 25 sNike"
+r exist or not it is now: ("2", "2BertilSvensson6000 m27 min 5 sAdidas")
+lets try a compare with biggest file and "2", "2BertilSvensson6000 m27 min 5 sAdidas" 
+r exist or not it is now: ("4", "4OlleLindström300010 min 22 sNa")
+lets try a compare with biggest file and "4", "4OlleLindström300010 min 22 sNa" 
+"4OlleLindström300010 min 22 sNa"
+r exist or not it is now: ("3", "3CeciliaSvensson2000 m9 min 15 sNike")
+lets try a compare with biggest file and "3", "3CeciliaSvensson2000 m9 min 15 sNike" 
