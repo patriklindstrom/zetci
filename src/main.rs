@@ -64,6 +64,7 @@ fn main() {
             // Sort Descending on size
             zets.sort_by(|a, b| b.len().cmp(&a.len()));
             let compare_z = zets.first();
+            let mut temp_compare_z: HashMap<String, String> = HashMap::new();
             match compare_z {
                 Some(compare_z_r) => println!("Length of compare_z is {:?}", compare_z_r.len()),
                 None => println!("Error in compare_z"),
@@ -81,7 +82,8 @@ fn main() {
                     match compare_z {
                         Some(fz) => {
                             if fz.contains_key(r.0) {
-                                println!("{:?}", r.1)
+                                println!("{:?}", r.1);
+                                temp_compare_z.insert(r.0.to_string(), r.1.to_string());
                             }
                         }
                         None => println!("Error in compare_z"),
