@@ -90,7 +90,9 @@ fn main() {
                     };
                 }
                 match compare_z {
-                    Some(tc) => tc = &temp_compare_z,
+                    Some(temp_compare_z) => {
+                        println!("Length of temp_compare_z is {:?}", temp_compare_z.len())
+                    }
                     None => println!("Error in temp_compare_z"),
                 };
             }

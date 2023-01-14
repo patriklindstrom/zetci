@@ -48,27 +48,29 @@ Length of compare_z is 8
 Nr of Rows in Hashmap is 6
 r exist or not it is now: ("1", "1AdamSvensson3000 m12 min 30 sNike")
 lets try a compare with biggest file and "1", "1AdamSvensson3000 m12 min 30 sNike" 
-r exist or not it is now: ("2", "2BertilSvensson6000 m27 min 5 sAdidas")
-lets try a compare with biggest file and "2", "2BertilSvensson6000 m27 min 5 sAdidas" 
-r exist or not it is now: ("3", "3CeciliaSvensson2000 m9 min 15 sNike")
-lets try a compare with biggest file and "3", "3CeciliaSvensson2000 m9 min 15 sNike" 
-r exist or not it is now: ("4", "4OlleLindström300010 min 22 sNa")
-lets try a compare with biggest file and "4", "4OlleLindström300010 min 22 sNa" 
-"4OlleLindström300010 min 22 sNa"
+r exist or not it is now: ("5", "5EmmaOlsson2000 m11 min 25 sNike")
+lets try a compare with biggest file and "5", "5EmmaOlsson2000 m11 min 25 sNike" 
+"5EmmaOlsson2000 m11 min 25 sNike"
 r exist or not it is now: ("6", "6AnnaLindström1000 m8 min 31 sAdidas")
 lets try a compare with biggest file and "6", "6AnnaLindström1000 m8 min 31 sAdidas" 
 "6AnnaLindström1000 m8 min 31 sAdidas"
-r exist or not it is now: ("5", "5EmmaOlsson2000 m11 min 25 sNike")
-lets try a compare with biggest file and "5", "5EmmaOlsson2000 m11 min 25 sNike" 
-"5EmmaOlsson2000 m11 min 25 sNike"
-Nr of Rows in Hashmap is 4
-r exist or not it is now: ("5", "5EmmaOlsson2000 m11 min 25 sNike")
-lets try a compare with biggest file and "5", "5EmmaOlsson2000 m11 min 25 sNike" 
-"5EmmaOlsson2000 m11 min 25 sNike"
 r exist or not it is now: ("2", "2BertilSvensson6000 m27 min 5 sAdidas")
 lets try a compare with biggest file and "2", "2BertilSvensson6000 m27 min 5 sAdidas" 
+r exist or not it is now: ("3", "3CeciliaSvensson2000 m9 min 15 sNike")
+lets try a compare with biggest file and "3", "3CeciliaSvensson2000 m9 min 15 sNike" 
 r exist or not it is now: ("4", "4OlleLindström300010 min 22 sNa")
 lets try a compare with biggest file and "4", "4OlleLindström300010 min 22 sNa" 
 "4OlleLindström300010 min 22 sNa"
+Length of temp_compare_z is 8
+Nr of Rows in Hashmap is 4
 r exist or not it is now: ("3", "3CeciliaSvensson2000 m9 min 15 sNike")
 lets try a compare with biggest file and "3", "3CeciliaSvensson2000 m9 min 15 sNike" 
+r exist or not it is now: ("2", "2BertilSvensson6000 m27 min 5 sAdidas")
+lets try a compare with biggest file and "2", "2BertilSvensson6000 m27 min 5 sAdidas" 
+r exist or not it is now: ("5", "5EmmaOlsson2000 m11 min 25 sNike")
+lets try a compare with biggest file and "5", "5EmmaOlsson2000 m11 min 25 sNike" 
+"5EmmaOlsson2000 m11 min 25 sNike"
+r exist or not it is now: ("4", "4OlleLindström300010 min 22 sNa")
+lets try a compare with biggest file and "4", "4OlleLindström300010 min 22 sNa" 
+"4OlleLindström300010 min 22 sNa"
+Length of temp_compare_z is 8
