@@ -32,10 +32,11 @@ fn read_data_file(file_path: String) -> Result<HashMap<String, String>, Box<dyn 
     Ok(set)
 }
 
-fn perform_union(files: Vec<&str>) -> Result<(), Box<dyn Error>> {
+// perform_union should return the zets variable
+fn perform_union(files: Vec<&str>) -> Result<Vec<HashMap<String, String>>, Box<dyn Error>> {
     // Placeholder for actual union logic
     println!("Performing union operation...");
-    let mut zets = Vec::with_capacity(files.len());
+    let mut zets: Vec<HashMap<String, String>> = Vec::with_capacity(files.len());
     for f in files {
         let dset = read_data_file(f.to_string()).expect("Cant handle file");
         zets.push(dset);
@@ -43,7 +44,7 @@ fn perform_union(files: Vec<&str>) -> Result<(), Box<dyn Error>> {
         println!("Processed file: {}", f);
     }
     println!("Number of Hashmaps are {:?}", zets.len());
-    Ok(())
+    Ok(zets)
 }
 
 fn perform_intersect(files: Vec<&str>) -> Result<(), Box<dyn Error>> {
@@ -73,9 +74,18 @@ fn main() {
         let files: Vec<_> = matches.values_of("files").unwrap().collect();
         match matches.subcommand() {
             ("UNION", Some(sub_m)) => {
-                if let Err(e) = perform_union(files.iter().map(AsRef::as_ref).collect()) {
-                    eprintln!("Error performing union: {}", e);
-                    process::exit(1);
+                match perform_union(files.iter().map(AsRef::as_ref).collect()) {
+                    Ok(zets) => {
+                        // loop over the zets and print them out
+                        for z in zets.iter() {
+                            println!("Union result: {:?}", z);
+                        }
+                        //
+                    }
+                    Err(e) => {
+                        eprintln!("Error performing union: {}", e);
+                        process::exit(1);
+                    }
                 }
             }
             ("INTERSECT", Some(sub_m)) => {
