@@ -3,34 +3,37 @@ version: "0.1"
 author: Patrik Lindstrom. <patrik.lindstrom.dev>
 about: Extracts data from several textfile with set based logic
 args:
-    - FILES:
-        short: f
-        long: files
-        takes_value: true
-        multiple: true
-        min_values: 1
-    - config:
-        short: c
-        long: config
-        value_name: CONF
-        help: Sets a custom config file
-        takes_value: true
-    - OUTPUT:
-        short: o
-        long: output
-        required: false
-        takes_value: true
-    - verbose:
-        short: v
-        multiple: true
-        help: Sets the level of verbosity
-    - UNION:
-        short: u
-        long: union
-        takes_value: false
-        help: Takes the unique rows of two or more files.
-    - INTERSECT:
-        short: i
-        long: intersection
-        takes_value: false
-        help: Gets the rows that exist in all of the files.
+  - files:
+      long: files
+      short: f
+      takes_value: true
+      multiple: true
+      min_values: 1
+      global: true
+  - config:
+      short: c
+      long: config
+      value_name: CONF
+      help: Sets a custom config file
+      takes_value: true
+      global: true
+  - output:
+      short: o
+      long: output
+      required: false
+      takes_value: true
+      global: true
+  - verbose:
+      short: v
+      multiple: true
+      help: Sets the level of verbosity
+      global: true
+subcommands:
+  - UNION:
+      long: union
+      short: u
+      help: Takes the unique rows of two or more files.
+  - INTERSECT:
+      long: intersect
+      short: i
+      help: Gets the rows that exist in all of the files.
