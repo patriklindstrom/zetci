@@ -6,6 +6,7 @@
 
 extern crate clap;
 extern crate csv;
+
 use clap::{load_yaml, App};
 use std::collections::HashMap;
 use std::env;
@@ -13,7 +14,7 @@ use std::error::Error;
 use std::fs::File;
 use std::process;
 
-fn read_data_file(file_path: String) -> Result<HashMap<String,String>, Box<dyn Error>> {
+fn read_data_file(file_path: String) -> Result<HashMap<String, String>, Box<dyn Error>> {
     // Build the CSV reader and iterate over each record.
     // let file_path: String = "/home/patrik/git/zet-cmder/testdata/fee.csv".to_string();
     let file = File::open(file_path)?;
@@ -31,12 +32,34 @@ fn read_data_file(file_path: String) -> Result<HashMap<String,String>, Box<dyn E
     Ok(set)
 }
 
+fn perform_union(files: Vec<&str>) -> Result<(), Box<dyn Error>> {
+    // Placeholder for actual union logic
+    println!("Performing union operation...");
+    let mut zets = Vec::with_capacity(files.len());
+    for f in files {
+        let dset = read_data_file(f.to_string()).expect("Cant handle file");
+        zets.push(dset);
+        // Actual union operation would go here
+        println!("Processed file: {}", f);
+    }
+    println!("Number of Hashmaps are {:?}", zets.len());
+    Ok(())
+}
+
+fn perform_intersect(files: Vec<&str>) -> Result<(), Box<dyn Error>> {
+    // Placeholder for actual intersect logic
+    println!("Performing intersect operation...");
+    // Similar to perform_union but for intersection
+    Ok(())
+}
+
 fn get_current_dir() -> String {
     let path = env::current_dir().unwrap();
     return path.display().to_string();
 }
+
 fn main() {
-    println!("Hello,funäsdalen !");
+    println!("Hello, Hemma på Skeppargatan !");
     println!("The current directory is {}", get_current_dir());
     let clap_config_yaml = load_yaml!("clap_config.yml");
     let app = App::from(clap_config_yaml);
@@ -44,24 +67,24 @@ fn main() {
     if let Some(i) = matches.value_of("OUTPUT") {
         println!("Value for output: {}", i);
     }
-    if matches.is_present("FILES") {
-        // "$  -f filename1.csv filename2.csv" was run
-        let files: Vec<_> = matches.values_of("FILES").unwrap().collect();
-        let mut zets = Vec::with_capacity(files.len());
-        for f in files {
-            println!("file : {}", f);
-            let dset=  read_data_file(f.to_string()).expect("Cant handle file") ;
-            println!("Hashmap's_length_comes for {} is {:?}",f.to_string(),dset.len());
-            zets.push(dset);
-            //match dset {
-            //    Ok(res_set)=> println!("Hashmap's_length_comes out to_be {:?}",res_set.len()),
-            //    Err(e)=> println!("Error"),
-            //}
-        }
-        println!("Number of Hashmapis is {:?}",zets.len());
-    }
+    if let Some(i) = matches.value_of("files") {
+        println!("Value for files: {}", i);
 
-    if matches.is_present("UNION") {
-        println!("operation is Union")
+        let files: Vec<_> = matches.values_of("files").unwrap().collect();
+        match matches.subcommand() {
+            ("UNION", Some(sub_m)) => {
+                if let Err(e) = perform_union(files.iter().map(AsRef::as_ref).collect()) {
+                    eprintln!("Error performing union: {}", e);
+                    process::exit(1);
+                }
+            }
+            ("INTERSECT", Some(sub_m)) => {
+                if let Err(e) = perform_intersect(files.iter().map(AsRef::as_ref).collect()) {
+                    eprintln!("Error performing intersection: {}", e);
+                    process::exit(1);
+                }
+            }
+            _ => println!("No valid subcommand was used"),
+        }
     }
 }
