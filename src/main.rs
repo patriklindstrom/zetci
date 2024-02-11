@@ -30,6 +30,7 @@ fn read_data_file(file_path: String) -> Result<HashMap<String,String>, Box<dyn E
     }
     Ok(set)
 }
+
 fn get_current_dir() -> String {
     let path = env::current_dir().unwrap();
     return path.display().to_string();
