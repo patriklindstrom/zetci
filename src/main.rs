@@ -30,13 +30,22 @@ fn read_data_file(file_path: String) -> Result<HashMap<String,String>, Box<dyn E
     }
     Ok(set)
 }
-
+fn perform_union(files: Vec<&str>) -> Result<(), Box<dyn Error>> {
+    // Placeholder for actual union logic
+    println!("Performing union operation...");
+    for f in files {
+        let data = read_data_file(f.to_string())?;
+        // Actual union operation would go here
+        println!("Processed file: {}", f);
+    }
+    Ok(())
+}
 fn get_current_dir() -> String {
     let path = env::current_dir().unwrap();
     return path.display().to_string();
 }
 fn main() {
-    println!("Hello,funäsdalen !");
+    println!("Hello, Hemma på Skeppargatan !");
     println!("The current directory is {}", get_current_dir());
     let clap_config_yaml = load_yaml!("clap_config.yml");
     let app = App::from(clap_config_yaml);
