@@ -30,6 +30,7 @@ fn read_data_file(file_path: String) -> Result<(), Box<dyn Error>> {
     }
     Ok(())
 }
+
 fn get_current_dir() -> String {
     let path = env::current_dir().unwrap();
     return path.display().to_string();
