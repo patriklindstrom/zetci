@@ -18,7 +18,6 @@ use std::fs::File;
 use std::process;
 const KEY_COLUMN: usize = 0;
 const HAS_HEADERS: bool = false;
-
 fn read_data_file(file_path: String, key_column: usize) -> Result<HashMap<String, String>, Box<dyn Error>> {
     // Build the CSV reader and iterate over each record.
     // let file_path: String = "/home/patrik/git/zet-cmder/testdata/fee.csv".to_string();
@@ -53,6 +52,7 @@ fn perform_union(files: Vec<&str>) -> Result<HashMap<String, String>, Box<dyn Er
         }
         info!("Processed file: {}", f);
     }
+
     info!("Number of Hashmaps are {:?}", zet.len());
     Ok(zet)
 }
@@ -74,7 +74,6 @@ fn perform_intersect(files: Vec<&str>) -> Result<HashMap<String, String>, Box<dy
     }
     zet.retain(|key, _| counts.get(key) == Some(&files.len()));
     Ok(zet)
-
 }
 fn get_current_dir() -> String {
     let path = env::current_dir().unwrap();
@@ -110,14 +109,17 @@ fn main() {
         match matches.subcommand() {
             ("UNION", Some(sub_m)) => {
                 match perform_union(files.iter().map(AsRef::as_ref).collect()) {
+
                     Ok(zet) => {
                         // Collect the keys into a vector
                         let mut keys: Vec<_> = zet.keys().collect();
+
                         // Sort the keys
                         keys.sort();
                         // Iterate over the sorted keys and print out the corresponding values
                         for key in keys {
                             println!("Union result: Key: {:?}, Value: {:?}", key, zet.get(key).unwrap());
+
                         }
                     }
                     Err(e) => {
