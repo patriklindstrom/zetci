@@ -34,14 +34,17 @@ fn read_data_file(file_path: String) -> Result<HashMap<String, String>, Box<dyn 
 }
 
 // perform_union should return the zets variable
-fn perform_union(files: Vec<&str>) -> Result<Vec<HashMap<String, String>>, Box<dyn Error>> {
+fn perform_union(files: Vec<&str>) -> Result<HashMap<String, String>, Box<dyn Error>> {
     // Placeholder for actual union logic
     println!("Performing union operation...");
-    let mut zets: Vec<HashMap<String, String>> = Vec::with_capacity(files.len());
+    let mut zets: HashMap<String, String> = HashMap::new();
     for f in files {
         let dset = read_data_file(f.to_string()).expect("Cant handle file");
-        zets.push(dset);
-        // Actual union operation would go here
+        for (key, value) in &dset {
+            if !zets.contains_key(key) {
+                zets.insert(key.clone(), value.clone());
+            }
+        }
         println!("Processed file: {}", f);
     }
     println!("Number of Hashmaps are {:?}", zets.len());
