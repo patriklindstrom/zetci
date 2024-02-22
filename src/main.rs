@@ -74,6 +74,7 @@ fn perform_intersect(files: Vec<&str>) -> Result<HashMap<String, String>, Box<dy
     }
     zet.retain(|key, _| counts.get(key) == Some(&files.len()));
     Ok(zet)
+
 }
 fn get_current_dir() -> String {
     let path = env::current_dir().unwrap();
