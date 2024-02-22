@@ -28,6 +28,14 @@ args:
       multiple: true
       help: Sets the level of verbosity
       global: true
+  - debug:
+      short: d
+      long: debug
+      help: Enables debug mode
+  - quiet:
+      short: q
+      help: Suppresses all output
+      global: true
 subcommands:
   - UNION:
       long: union
