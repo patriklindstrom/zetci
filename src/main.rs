@@ -3,6 +3,7 @@
 
 // cargo run --  --files "../testdata/foo.csv" "../testdata/fum.csv" -o
 // ../testdata/union_output.csv union
+#![allow(unused_variables)]
 
 extern crate clap;
 extern crate csv;
@@ -47,11 +48,19 @@ fn perform_union(files: Vec<&str>) -> Result<Vec<HashMap<String, String>>, Box<d
     Ok(zets)
 }
 
-fn perform_intersect(files: Vec<&str>) -> Result<(), Box<dyn Error>> {
+fn perform_intersect(files: Vec<&str>) -> Result<Vec<HashMap<String, String>>, Box<dyn Error>> {
     // Placeholder for actual intersect logic
     println!("Performing intersect operation...");
     // Similar to perform_union but for intersection
-    Ok(())
+    let mut zets: Vec<HashMap<String, String>> = Vec::with_capacity(files.len());
+    for f in files {
+        let dset = read_data_file(f.to_string()).expect("Cant handle file");
+        zets.push(dset);
+        // Actual intersect  operation would go here
+        println!("Processed file: {}", f);
+    }
+    println!("Number of Hashmaps are {:?}", zets.len());
+    Ok(zets)
 }
 
 fn get_current_dir() -> String {
@@ -69,9 +78,9 @@ fn main() {
         println!("Value for output: {}", i);
     }
     if let Some(i) = matches.value_of("files") {
-        println!("Value for files: {}", i);
-
         let files: Vec<_> = matches.values_of("files").unwrap().collect();
+        let files_str = files.join(", ");
+        println!("Value for files: {}", files_str);
         match matches.subcommand() {
             ("UNION", Some(sub_m)) => {
                 match perform_union(files.iter().map(AsRef::as_ref).collect()) {
