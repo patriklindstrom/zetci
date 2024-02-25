@@ -58,25 +58,24 @@ fn perform_union(files: Vec<&str>) -> Result<HashMap<String, String>, Box<dyn Er
     Ok(zet)
 }
 
+/* We first create a counts hashmap to keep track of the count of each key across all files.
+ Then, we read each file into the zet hashmap and increment the count of each key in the counts hashmap.
+ Finally, we retain only the keys in zet whose count is equal to the number of files.
+ This ensures that only the keys that exist in all files are retained.*/
 fn perform_intersect(files: Vec<&str>) -> Result<HashMap<String, String>, Box<dyn Error>> {
-    // Placeholder for actual intersect logic
     info!("Performing intersect operation...");
-    let mut all_but_smallest_files_as_hashmaps: Vec<HashMap<String, String>> = Vec::with_capacity(files.len() - 1);
-    let mut files_sorted: Vec<&str> = files.clone();
-    // We sort the files by file size to start with the smallest file
-    files_sorted.sort_by_key(|&file| std::fs::metadata(file).expect("Unable to access metadata").len());
-    // We start with the smallest file and read it into the zet HashMap
-    let file = files_sorted.first().expect("No files provided");
-    let mut zet: HashMap<String, String> = read_data_file(file.to_string(), KEY_COLUMN).expect("Cant handle file");
-
-    for f in files_sorted.iter().skip(1) {
+    let mut counts: HashMap<String, usize> = HashMap::new();
+    let mut zet: HashMap<String, String> = HashMap::new();
+    for f in &files {
         let dset = read_data_file(f.to_string(), KEY_COLUMN).expect("Cant handle file");
-        all_but_smallest_files_as_hashmaps.push(dset);
+        for (key, value) in dset {
+            *counts.entry(key.clone()).or_insert(0) += 1;
+            zet.insert(key, value);
+        }
     }
-     zet.retain(|key, _| all_but_smallest_files_as_hashmaps.iter().all(|hm| hm.contains_key(key)));
+    zet.retain(|key, _| counts.get(key) == Some(&files.len()));
     Ok(zet)
 }
-
 fn get_current_dir() -> String {
     let path = env::current_dir().unwrap();
     return path.display().to_string();
