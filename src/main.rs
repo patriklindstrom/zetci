@@ -78,6 +78,11 @@ fn perform_intersect(files: Vec<&str>) -> Result<HashMap<String, String>, Box<dy
 
     Ok(zet)
 }
+fn perform_left(files: Vec<&str>) -> Result<HashMap<String, String>, Box<dyn Error>> {
+    todo!();
+    let mut zet: HashMap<String, String> = HashMap::new();
+    Ok(zet)
+}
 fn get_current_dir() -> String {
     let path = env::current_dir().unwrap();
     return path.display().to_string();
@@ -149,7 +154,28 @@ fn main() {
                 }
 
             }
+            ("LEFT", Some(sub_m)) => {
+                match perform_left(files.iter().map(AsRef::as_ref).collect()) {
+                    Ok(zet) => {
+                        // Collect the keys into a vector
+                        let mut keys: Vec<_> = zet.keys().collect();
+                        // Sort the keys
+                        keys.sort();
+                        // Iterate over the sorted keys and print out the corresponding values
+                        for key in keys {
+                            println!("Left join result: Key: {:?}, Value: {:?}", key, zet.get(key).unwrap());
+                        }
+                    }
+                    Err(e) => {
+                        eprintln!("Error performing Left Join: {}", e);
+                        process::exit(1);
+                    }
+                }
+
+            }
             _ => println!("No valid subcommand was used"),
         }
     }
 }
+
+
