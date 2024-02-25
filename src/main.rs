@@ -18,6 +18,7 @@ use std::fs::File;
 use std::process;
 const KEY_COLUMN: usize = 0;
 const HAS_HEADERS: bool = false;
+
 fn read_data_file(file_path: String, key_column: usize) -> Result<HashMap<String, String>, Box<dyn Error>> {
     // Build the CSV reader and iterate over each record.
     // let file_path: String = "/home/patrik/git/zet-cmder/testdata/fee.csv".to_string();
@@ -42,35 +43,38 @@ fn read_data_file(file_path: String, key_column: usize) -> Result<HashMap<String
 fn perform_union(files: Vec<&str>) -> Result<HashMap<String, String>, Box<dyn Error>> {
     // Placeholder for actual union logic
     info!("Performing union operation...");
-    let mut zets: HashMap<String, String> = HashMap::new();
+    let mut zet: HashMap<String, String> = HashMap::new();
     for f in files {
-        let dset = read_data_file(f.to_string(),KEY_COLUMN).expect("Cant handle file");
+        let dset = read_data_file(f.to_string(), KEY_COLUMN).expect("Cant handle file");
         for (key, value) in &dset {
-            if !zets.contains_key(key) {
-                zets.insert(key.clone(), value.clone());
+            if !zet.contains_key(key) {
+                zet.insert(key.clone(), value.clone());
             }
         }
         info!("Processed file: {}", f);
     }
-    info!("Number of Hashmaps are {:?}", zets.len());
-    Ok(zets)
+    info!("Number of Hashmaps are {:?}", zet.len());
+    Ok(zet)
 }
 
-fn perform_intersect(files: Vec<&str>) -> Result<Vec<HashMap<String, String>>, Box<dyn Error>> {
-    // Placeholder for actual intersect logic
+/* We first create a counts hashmap to keep track of the count of each key across all files.
+ Then, we read each file into the zet hashmap and increment the count of each key in the counts hashmap.
+ Finally, we retain only the keys in zet whose count is equal to the number of files.
+ This ensures that only the keys that exist in all files are retained.*/
+fn perform_intersect(files: Vec<&str>) -> Result<HashMap<String, String>, Box<dyn Error>> {
     info!("Performing intersect operation...");
-    // Similar to perform_union but for intersection
-    let mut zets: Vec<HashMap<String, String>> = Vec::with_capacity(files.len());
-    for f in files {
+    let mut counts: HashMap<String, usize> = HashMap::new();
+    let mut zet: HashMap<String, String> = HashMap::new();
+    for f in &files {
         let dset = read_data_file(f.to_string(), KEY_COLUMN).expect("Cant handle file");
-        zets.push(dset);
-        // Actual intersect  operation would go here
-        info!("Processed file: {}", f);
+        for (key, value) in dset {
+            *counts.entry(key.clone()).or_insert(0) += 1;
+            zet.insert(key, value);
+        }
     }
-    info!("Number of Hashmaps are {:?}", zets.len());
-    Ok(zets)
+    zet.retain(|key, _| counts.get(key) == Some(&files.len()));
+    Ok(zet)
 }
-
 fn get_current_dir() -> String {
     let path = env::current_dir().unwrap();
     return path.display().to_string();
@@ -105,14 +109,14 @@ fn main() {
         match matches.subcommand() {
             ("UNION", Some(sub_m)) => {
                 match perform_union(files.iter().map(AsRef::as_ref).collect()) {
-                    Ok(zets) => {
+                    Ok(zet) => {
                         // Collect the keys into a vector
-                        let mut keys: Vec<_> = zets.keys().collect();
+                        let mut keys: Vec<_> = zet.keys().collect();
                         // Sort the keys
                         keys.sort();
                         // Iterate over the sorted keys and print out the corresponding values
                         for key in keys {
-                            println!("Union result: Key: {:?}, Value: {:?}", key, zets.get(key).unwrap());
+                            println!("Union result: Key: {:?}, Value: {:?}", key, zet.get(key).unwrap());
                         }
                     }
                     Err(e) => {
@@ -122,9 +126,21 @@ fn main() {
                 }
             }
             ("INTERSECT", Some(sub_m)) => {
-                if let Err(e) = perform_intersect(files.iter().map(AsRef::as_ref).collect()) {
-                    eprintln!("Error performing intersection: {}", e);
-                    process::exit(1);
+                match perform_intersect(files.iter().map(AsRef::as_ref).collect()) {
+                    Ok(zet) => {
+                        // Collect the keys into a vector
+                        let mut keys: Vec<_> = zet.keys().collect();
+                        // Sort the keys
+                        keys.sort();
+                        // Iterate over the sorted keys and print out the corresponding values
+                        for key in keys {
+                            println!("Intersection result: Key: {:?}, Value: {:?}", key, zet.get(key).unwrap());
+                        }
+                    }
+                    Err(e) => {
+                        eprintln!("Error performing intersection: {}", e);
+                        process::exit(1);
+                    }
                 }
             }
             _ => println!("No valid subcommand was used"),
