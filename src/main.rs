@@ -83,6 +83,11 @@ fn perform_left(files: Vec<&str>) -> Result<HashMap<String, String>, Box<dyn Err
     let mut zet: HashMap<String, String> = HashMap::new();
     Ok(zet)
 }
+fn perform_difference(files: Vec<&str>) -> Result<HashMap<String, String>, Box<dyn Error>> {
+    todo!();
+    let mut zet: HashMap<String, String> = HashMap::new();
+    Ok(zet)
+}
 fn get_current_dir() -> String {
     let path = env::current_dir().unwrap();
     return path.display().to_string();
