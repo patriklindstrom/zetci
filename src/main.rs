@@ -16,8 +16,10 @@ use std::env;
 use std::error::Error;
 use std::fs::File;
 use std::process;
+
 const KEY_COLUMN: usize = 0;
 const HAS_HEADERS: bool = false;
+
 fn read_data_file(file_path: String, key_column: usize) -> Result<HashMap<String, String>, Box<dyn Error>> {
     // Build the CSV reader and iterate over each record.
     // let file_path: String = "/home/patrik/git/zet-cmder/testdata/fee.csv".to_string();
@@ -73,6 +75,7 @@ fn perform_intersect(files: Vec<&str>) -> Result<HashMap<String, String>, Box<dy
         }
     }
     zet.retain(|key, _| counts.get(key) == Some(&files.len()));
+
     Ok(zet)
 }
 fn get_current_dir() -> String {
@@ -119,7 +122,6 @@ fn main() {
                         // Iterate over the sorted keys and print out the corresponding values
                         for key in keys {
                             println!("Union result: Key: {:?}, Value: {:?}", key, zet.get(key).unwrap());
-
                         }
                     }
                     Err(e) => {
@@ -145,6 +147,7 @@ fn main() {
                         process::exit(1);
                     }
                 }
+
             }
             _ => println!("No valid subcommand was used"),
         }
