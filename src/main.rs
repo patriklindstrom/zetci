@@ -16,7 +16,6 @@ use std::env;
 use std::error::Error;
 use std::fs::File;
 use std::process;
-
 const KEY_COLUMN: usize = 0;
 const HAS_HEADERS: bool = false;
 
@@ -143,7 +142,6 @@ fn main() {
                         process::exit(1);
                     }
                 }
-
             }
             _ => println!("No valid subcommand was used"),
         }
