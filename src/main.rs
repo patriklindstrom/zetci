@@ -8,7 +8,6 @@
 extern crate clap;
 extern crate csv;
 mod set_operations;
-use clap::{load_yaml, App};
 use std::collections::{HashMap};
 use log::{info, debug};
 use env_logger::Builder;
@@ -17,7 +16,7 @@ use std::process;
 use set_operations::union::perform_union;
 use set_operations::difference::perform_difference;
 use set_operations::intersect::perform_intersect;
-
+use set_operations::clap_config::get_clap_app;
 fn perform_operation(operation: fn(Vec<&str>) -> Result<HashMap<String, String>, Box<dyn Error>>, operation_name: &str, files: Vec<&str>) {
     match operation(files) {
         Ok(zet) => {
@@ -37,10 +36,10 @@ fn perform_operation(operation: fn(Vec<&str>) -> Result<HashMap<String, String>,
     }
 }
 fn main() {
-    debug!("Hello, Hemma på Skeppargatan !");
-
-    let clap_config_yaml = load_yaml!("clap_config.yml");
-    let app = App::from(clap_config_yaml);
+    debug!("Hello, Hemma på Skeppargatan, we are almost home !");
+    // let clap_config_yaml = load_yaml!("clap_config.yml");
+    // let app = App::from(clap_config_yaml);
+    let app = get_clap_app();
     let matches = app.get_matches();
     // Initialize the logger
     let mut builder = Builder::from_default_env();
