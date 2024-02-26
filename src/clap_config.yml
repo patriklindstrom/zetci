@@ -45,3 +45,11 @@ subcommands:
       long: intersect
       short: i
       help: Gets the rows that exist in all of the files.
+  - LEFT:
+      long: left
+      short: l
+      help: Gets the rows that exist in the first file and also in the second file and so on.
+  - DIFFERENCE:
+      long: difference
+      short: d
+      help: Gets the rows that do not exist in the first file and but in the second file and so on.
