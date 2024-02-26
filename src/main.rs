@@ -7,7 +7,7 @@
 
 extern crate clap;
 extern crate csv;
-mod set_operations;
+pub mod set_operations;
 use std::collections::{HashMap};
 use log::{info, debug};
 use env_logger::Builder;

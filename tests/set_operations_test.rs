@@ -1,0 +1,45 @@
+
+// tests/set_operations_test.rs
+use std::collections::HashMap;
+use zet_cmder::set_operations::intersect::perform_intersect;
+// Add reference to the pub function pub fn perform_union in the module under src/set_operations/union.rs
+use zet_cmder::set_operations::union::perform_union;
+use zet_cmder::set_operations::difference::perform_difference;
+#[test]
+fn test_perform_union() {
+    let files = vec!["./testdata/fee.csv","./testdata/foo.csv", "./testdata/fum.csv"];
+    let result = perform_union(files).unwrap();
+let expected: HashMap<String, String> = [
+    ("0", "0,Lilith,Larsson,6000 m,16 min 2 s,Bare"),
+    ("1", "1,Adam,Svensson,3000 m,12 min 30 s,Nike"),
+    ("2", "2,Bertil,Svensson,6000 m,27 min 5 s,Adidas"),
+    ("3", "3,Cecilia,Svensson,2000 m,9 min 15 s,Nike"),
+    ("4", "4,Olle,Lindström,3000,10 min 22 s,Na"),
+    ("5", "5,Emma,Olsson,2000 m,11 min 25 s,Nike"),
+    ("6", "6,Anna,Lindström,1000 m,8 min 31 s,Adidas"),
+    ("7", "7,Hampus,Olsson,1000 m,8 min 15 s,Nike"),
+].iter().map(|(k, v)| (k.to_string(), v.to_string())).collect();
+    assert_eq!(result, expected, "The union of the three files should be all keys from 0 to 7");
+}
+#[test]
+fn test_perform_intersect() {
+    let files = vec!["./testdata/fee.csv","./testdata/foo.csv"];
+    let result = perform_intersect(files).unwrap();
+    let expected: HashMap<String, String> = [
+        ("4", "4,Olle,Lindström,3000,10 min 22 s,Na"),
+        ("5", "5,Emma,Olsson,2000 m,11 min 25 s,Nike"),
+    ].iter().map(|(k, v)| (k.to_string(), v.to_string())).collect();
+    assert_eq!(result, expected, "The intersection of the three files should be 4 and 5");
+}
+
+#[test]
+fn test_perform_difference() {
+    let files = vec!["./testdata/fum.csv","./testdata/fee.csv"];
+    let result = perform_difference(files).unwrap();
+    let expected: HashMap<String, String> = [
+        ("1", "1,Adam,Svensson,3000 m,12 min 30 s,Nike"),
+        ("2", "2,Bertil,Svensson,6000 m,27 min 5 s,Adidas"),
+        ("3", "3,Cecilia,Svensson,2000 m,9 min 15 s,Nike"),
+    ].iter().map(|(k, v)| (k.to_string(), v.to_string())).collect();
+    assert_eq!(result, expected, "The difference of the two files fee.csv and foo.csv should be the keys 1,2,3");
+}
