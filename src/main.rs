@@ -9,7 +9,7 @@ extern crate clap;
 extern crate csv;
 
 use clap::{load_yaml, App};
-use std::collections::HashMap;
+use std::collections::{HashMap, HashSet};
 use log::{info, debug};
 use env_logger::Builder;
 use std::env;
@@ -94,12 +94,8 @@ fn perform_difference(files: Vec<&str>) -> Result<HashMap<String, String>, Box<d
     for f in files.iter().skip(1) {
         println!("Opening file: {}", f);
         let d_set = read_data_file(f.to_string(), KEY_COLUMN).expect("Cant handle file");
-        for (key, value) in &d_set {
-            if a_zet.contains_key(key) {
-                let key_to_remove = key.to_string(); // replace with your actual key
-                a_zet.retain(|key, _| key != &key_to_remove);
-            }
-        }
+        let d_keys: HashSet<_> = d_set.keys().map(|k| k.clone()).collect();
+        a_zet.retain(|key, _| !d_keys.contains(key));
         info!("Processed file: {}", f);
     }
     Ok(a_zet)
