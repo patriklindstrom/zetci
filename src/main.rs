@@ -68,8 +68,6 @@ We first create a counts hashmap to keep track of the count of each key across a
  This ensures that only the keys that exist in all files are retained.*/
 fn perform_intersect(files: Vec<&str>) -> Result<HashMap<String, String>, Box<dyn Error>> {
     info!("Performing intersect operation...");
-    info!("Current directory file: {}", get_current_dir());
-
     let mut counts: HashMap<String, usize> = HashMap::new();
     let mut zet: HashMap<String, String> = HashMap::new();
     for f in &files {
@@ -105,7 +103,24 @@ fn get_current_dir() -> String {
     let path = env::current_dir().unwrap();
     return path.display().to_string();
 }
-
+fn perform_operation(operation: fn(Vec<&str>) -> Result<HashMap<String, String>, Box<dyn Error>>, operation_name: &str, files: Vec<&str>) {
+    match operation(files) {
+        Ok(zet) => {
+            // Collect the keys into a vector
+            let mut keys: Vec<_> = zet.keys().collect();
+            // Sort the keys
+            keys.sort();
+            // Iterate over the sorted keys and print out the corresponding values
+            for key in keys {
+                println!("{} result: Key: {:?}, Value: {:?}", operation_name, key, zet.get(key).unwrap());
+            }
+        }
+        Err(e) => {
+            eprintln!("Error performing {}: {}", operation_name, e);
+            process::exit(1);
+        }
+    }
+}
 fn main() {
     debug!("Hello, Hemma på Skeppargatan !");
     debug!("The current directory is {}", get_current_dir());
@@ -133,62 +148,14 @@ fn main() {
         let files_str = files.join(", ");
         debug!("Value for files: {}", files_str);
         match matches.subcommand() {
-            ("UNION", Some(sub_m)) => {
-                match perform_union(files.iter().map(AsRef::as_ref).collect()) {
-                    Ok(zet) => {
-                        // Collect the keys into a vector
-                        let mut keys: Vec<_> = zet.keys().collect();
-
-                        // Sort the keys
-                        keys.sort();
-                        // Iterate over the sorted keys and print out the corresponding values
-                        for key in keys {
-                            println!("Union result: Key: {:?}, Value: {:?}", key, zet.get(key).unwrap());
-                        }
-                    }
-                    Err(e) => {
-                        eprintln!("Error performing union: {}", e);
-                        process::exit(1);
-                    }
-                }
+            ("UNION", Some(_)) => {
+                perform_operation(perform_union, "Union", files.iter().map(AsRef::as_ref).collect());
             }
-            ("INTERSECT", Some(sub_m)) => {
-                match perform_intersect(files.iter().map(AsRef::as_ref).collect()) {
-                    Ok(zet) => {
-                        // Collect the keys into a vector
-                        let mut keys: Vec<_> = zet.keys().collect();
-                        // Sort the keys
-                        keys.sort();
-                        // Iterate over the sorted keys and print out the corresponding values
-                        for key in keys {
-                            println!("Intersection result: Key: {:?}, Value: {:?}", key, zet.get(key).unwrap());
-                        }
-                    }
-                    Err(e) => {
-                        eprintln!("Error performing intersection: {}", e);
-                        process::exit(1);
-                    }
-                }
-
+            ("INTERSECT", Some(_)) => {
+                perform_operation(perform_intersect, "Intersection", files.iter().map(AsRef::as_ref).collect());
             }
-            ("DIFFERENCE", Some(sub_m)) => {
-                match perform_difference(files.iter().map(AsRef::as_ref).collect()) {
-                    Ok(zet) => {
-                        // Collect the keys into a vector
-                        let mut keys: Vec<_> = zet.keys().collect();
-                        // Sort the keys
-                        keys.sort();
-                        // Iterate over the sorted keys and print out the corresponding values
-                        for key in keys {
-                            println!("Left join result: Key: {:?}, Value: {:?}", key, zet.get(key).unwrap());
-                        }
-                    }
-                    Err(e) => {
-                        eprintln!("Error performing Left Join: {}", e);
-                        process::exit(1);
-                    }
-                }
-
+            ("DIFFERENCE", Some(_)) => {
+                perform_operation(perform_difference, "Difference", files.iter().map(AsRef::as_ref).collect());
             }
             _ => println!("No valid subcommand was used"),
         }
