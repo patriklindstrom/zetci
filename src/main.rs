@@ -135,7 +135,6 @@ fn main() {
         match matches.subcommand() {
             ("UNION", Some(sub_m)) => {
                 match perform_union(files.iter().map(AsRef::as_ref).collect()) {
-
                     Ok(zet) => {
                         // Collect the keys into a vector
                         let mut keys: Vec<_> = zet.keys().collect();
