@@ -38,10 +38,43 @@ files which in this case is just fileA.csv
 
 ## Really advanced example
 ## What parameters does it understand
-* files Sets the input file to use
-* union Performs union operation on csv files
-* intersect Performs intersection operation on csv files
-* difference  Performs difference operation on csv files
+* **files** Sets the input file to use
+* **union** Performs union operation on csv files
+* **intersect** Performs intersection operation on csv files
+* **difference**  Performs difference operation on csv files
+
+# About sets and its operations
+We want eg the following set operations:
+not A and B => DiffFile  see [Explanation of expression](http://www.wolframalpha.com/input/?i=not+A+and+B "link to Wolframealpha") or see more easily [Venn diagram](http://www.wolframalpha.com/share/clip?f=d41d8cd98f00b204e9800998ecf8427e41kvo33uui "link to graph on Wolframealpha")
+A and B => IntersectionFile see [Explanation of expression](http://www.wolframalpha.com/input/?i=A+and+B "link to Wolframealpha") or see more easily [Venn diagram]( http://www.wolframalpha.com/share/clip?f=d41d8cd98f00b204e9800998ecf8427e7e2qko5194 "link to graph on Wolframealpha")
+NotaBene combined => (not A and B) or (A and B) see [Explanation of expression](http://www.wolframalpha.com/input/?i=%28not+A+and+B%29+or+%28A+and+B%29 "link to Wolframealpha") or see more easily [Venn diagram](http://www.wolframalpha.com/share/clip?f=d41d8cd98f00b204e9800998ecf8427eguh00j5eik "link to graph on Wolframealpha")
+DiffFile+IntersctionFile => FileB
+## Example
+### Simple intersection
+Make an intersection between file a and b the key are in column 4,6,7 seperator in the csv files a and b are semicolon (;) make it verbose.
+> zetci -v -i -a"s:\Darkcompare\A_TestFile.cs"  -b"s:\Darkcompare\B_TestFile.cs" -k4 6 7 -s;
+Shown in Venn Diagram it would be:
+![Link to Venn Diagagram showing A and B](http://i.imgur.com/lNnPvV2.png)
+In pseudo SQL it would be something like:
+> SELECT a.* from A_TestFile as a INNER JOIN B_TestFile as b on a.k4=b.k4 and a.k6=b.k6 and a.k7=b.k7
+
+### Many Setoperation on two sets
+On the two sets A_TestFile and B_TestFile defined by the key on column 1 and 2 where the column separator is semicolon (;)
+make sets that are DiffB and DiffA and the intersection of the two. Describe all in a verbose style.
+>zetci -v  -a".\A_TestFile.csv"  -b".\B_TestFile.csv" -k1 2 -s; -r -d -i
+
+In Venn Diagram
+DiffB  ![Venn Diagram Showing DiffB operation](http://i.imgur.com/Ig0o6mf.png), DiffA ![Venn diagram DiffA](http://i.imgur.com/9DK6QlX.png), Intersection ![Link to Venn Diagagram showing A and B](http://i.imgur.com/lNnPvV2.png)
+
+In pseudo SQL it would be something like:
+> SELECT b.* from B_TestFile as b  WHERE b.key_1_2 not in (Select a.key_1_2 from A_TestFile as a)
+
+DiffA
+> SELECT a.* from A_TestFile as a  WHERE a.key_1_2 not in (Select a.key_1_2 from B_TestFile as b)
+
+Intersection
+> SELECT a.* from A_TestFile as a  INNER JOIN B_TestFile as b ON (a.key_1_2 = b.key_1_2 )
+
 # How is the program written
 ## Testdriven
 ## Hashmaps
@@ -58,8 +91,10 @@ Fast, simple
 Compete with sql databases
 ## Features Request.
 ### Sort output file
-### compress large files that has key
+### Define multiple columns as key
+### Compress large files data
 ### Guess format of datafiles when you use keys
+### Parallelize the workload, eg read files in parallel, hashmaps in parallel.
 ## Todos
 checkout right hash algoritmh. The default one for hashmap is not great for
 small och large date. 
