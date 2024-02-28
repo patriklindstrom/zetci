@@ -2,7 +2,7 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/.idea/zet-cmder.iml" filepath="$PROJECT_DIR$/.idea/zet-cmder.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/zetci.iml" filepath="$PROJECT_DIR$/.idea/zetci.iml" />
     </modules>
   </component>
 </project>
