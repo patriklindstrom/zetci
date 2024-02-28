@@ -8,7 +8,7 @@ const HAS_HEADERS: bool = false;
 
 pub fn read_data_file(file_path: String, key_column: usize) -> Result<HashMap<String, String>, Box<dyn Error>> {
     // Build the CSV reader and iterate over each record.
-    // let file_path: String = "/home/patrik/git/zet-cmder/testdata/fee.csv".to_string();
+    // let file_path: String = "/home/patrik/git/zetci/testdata/fee.csv".to_string();
     debug!("The current directory is {}", get_current_dir());
     let file = File::open(file_path)?;
     let mut rdr = csv::ReaderBuilder::new()

@@ -1,10 +1,10 @@
 
 // tests/set_operations_test.rs
 use std::collections::HashMap;
-use zet_cmder::set_operations::intersect::perform_intersect;
+use zetci::set_operations::intersect::perform_intersect;
 // Add reference to the pub function pub fn perform_union in the module under src/set_operations/union.rs
-use zet_cmder::set_operations::union::perform_union;
-use zet_cmder::set_operations::difference::perform_difference;
+use zetci::set_operations::union::perform_union;
+use zetci::set_operations::difference::perform_difference;
 #[test]
 fn test_perform_union() {
     let files = vec!["./testdata/fee.csv","./testdata/foo.csv", "./testdata/fum.csv"];
