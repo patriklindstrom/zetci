@@ -1,14 +1,15 @@
 **tl;dr This cmd program can compare text files and find what rows are the
 same or differ**
-`____   ___
-/    \ /   \
-/      X     \
-|  (A) /^\ (B) |
-|     /ZET\    |
-\     \ CI/    /
-\      X     /
-\___/  \___/
-`
+```
+      ____   ___
+     /    \ /   \
+    /      X     \
+   | (A)  /^\ (B) |
+   |     /***\    |
+   \     \***/    /
+    \ zet  X  ci /
+     \___/  \___/
+```
 # Readme zetci
 
 # How to use it
