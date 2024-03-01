@@ -8,12 +8,11 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="9c0b3c2e-243f-4e38-a4ca-ebe6171279a9" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/src/set_operations/exor.rs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main.rs" beforeDir="false" afterPath="$PROJECT_DIR$/src/main.rs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/set_operations/clap_config.rs" beforeDir="false" afterPath="$PROJECT_DIR$/src/set_operations/clap_config.rs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/set_operations/difference.rs" beforeDir="false" afterPath="$PROJECT_DIR$/src/set_operations/diffa.rs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/set_operations/mod.rs" beforeDir="false" afterPath="$PROJECT_DIR$/src/set_operations/mod.rs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/tests/set_operations_test.rs" beforeDir="false" afterPath="$PROJECT_DIR$/tests/set_operations_test.rs" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -82,7 +81,7 @@
     "WebServerToolWindowFactoryState": "false",
     "git-widget-placeholder": "f/add-exor",
     "ignore.virus.scanning.warn.message": "true",
-    "last_opened_file_path": "D:/patli/gitrepo/zetci",
+    "last_opened_file_path": "D:/patli/gitrepo/zetci/src/set_operations",
     "node.js.detected.package.eslint": "true",
     "node.js.detected.package.tslint": "true",
     "node.js.selected.package.eslint": "(autodetect)",
@@ -94,6 +93,11 @@
     "vue.rearranger.settings.migration": "true"
   }
 }]]></component>
+  <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="D:\patli\gitrepo\zetci\src\set_operations" />
+    </key>
+  </component>
   <component name="RunManager" selected="Cargo.Run About">
     <configuration name="Run About" type="CargoCommandRunConfiguration" factoryName="Cargo Command" folderName="meta information">
       <option name="command" value="run -- about" />
