@@ -4,7 +4,7 @@ use log::info;
 use crate::set_operations::utils::{get_current_dir, read_data_file};
 const KEY_COLUMN: usize = 0;
 // not A and B
-pub fn perform_difference(files: Vec<&String>) -> Result<HashMap<String, String>, Box<dyn Error>> {
+pub fn perform_diffa(files: Vec<&String>) -> Result<HashMap<String, String>, Box<dyn Error>> {
     info!("Performing difference set operation...");
     let a_file = &files[0];
     info!("Current directory file: {}", get_current_dir());
