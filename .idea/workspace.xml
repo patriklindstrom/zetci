@@ -7,21 +7,7 @@
     <cargoProject FILE="$PROJECT_DIR$/Cargo.toml" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="9c0b3c2e-243f-4e38-a4ca-ebe6171279a9" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/src/logo.rs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Cargo.lock" beforeDir="false" afterPath="$PROJECT_DIR$/Cargo.lock" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Cargo.toml" beforeDir="false" afterPath="$PROJECT_DIR$/Cargo.toml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/readme.md" beforeDir="false" afterPath="$PROJECT_DIR$/readme.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/clap_config.yml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/lib.rs" beforeDir="false" afterPath="$PROJECT_DIR$/src/lib.rs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main.rs" beforeDir="false" afterPath="$PROJECT_DIR$/src/main.rs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/set_operations/clap_config.rs" beforeDir="false" afterPath="$PROJECT_DIR$/src/set_operations/clap_config.rs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/set_operations/difference.rs" beforeDir="false" afterPath="$PROJECT_DIR$/src/set_operations/difference.rs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/set_operations/intersect.rs" beforeDir="false" afterPath="$PROJECT_DIR$/src/set_operations/intersect.rs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/set_operations/union.rs" beforeDir="false" afterPath="$PROJECT_DIR$/src/set_operations/union.rs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/tests/set_operations_test.rs" beforeDir="false" afterPath="$PROJECT_DIR$/tests/set_operations_test.rs" afterDir="false" />
-    </list>
+    <list default="true" id="9c0b3c2e-243f-4e38-a4ca-ebe6171279a9" name="Changes" comment="" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -280,7 +266,7 @@
       <workItem from="1709149416827" duration="1547000" />
       <workItem from="1709151067803" duration="111000" />
       <workItem from="1709240354557" duration="31000" />
-      <workItem from="1709240400029" duration="13836000" />
+      <workItem from="1709240400029" duration="14151000" />
     </task>
     <servers />
   </component>
