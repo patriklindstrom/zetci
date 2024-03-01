@@ -9,6 +9,8 @@ extern crate clap;
 extern crate csv;
 
 pub mod set_operations;
+pub mod logo;
+
 use std::collections::{HashMap};
 use log::{info, debug};
 use env_logger::Builder;
@@ -17,8 +19,10 @@ use std::process;
 use set_operations::union::perform_union;
 use set_operations::difference::perform_difference;
 use set_operations::intersect::perform_intersect;
-use set_operations::clap_config::get_clap_app;
-fn perform_operation(operation: fn(Vec<&str>) -> Result<HashMap<String, String>, Box<dyn Error>>, operation_name: &str, files: Vec<&str>) {
+use logo::logo;
+use crate::set_operations::clap_config::cli;
+
+fn perform_operation(operation: fn(Vec<&String>) -> Result<HashMap<String, String>, Box<dyn Error>>, operation_name: &str, files: Vec<&String>) {
     match operation(files) {
         Ok(zet) => {
             // Collect the keys into a vector
@@ -36,44 +40,53 @@ fn perform_operation(operation: fn(Vec<&str>) -> Result<HashMap<String, String>,
         }
     }
 }
+
 fn main() {
     debug!("Hello, Hemma på Skeppargatan, we are almost home !");
     // let clap_config_yaml = load_yaml!("clap_config.yml");
     // let app = App::from(clap_config_yaml);
-    let app = get_clap_app();
-    let matches = app.get_matches();
+
+    let matches = cli().get_matches();
     // Initialize the logger
     let mut builder = Builder::from_default_env();
-    if matches.is_present("debug") {
-        builder.filter_level(log::LevelFilter::Debug);
-    } else {
-        builder.filter_level(log::LevelFilter::Info);
-    }
+    /*    if matches.args_present("debug"){
+            builder.filter_level(log::LevelFilter::Debug);
+        } else {
+            builder.filter_level(log::LevelFilter::Info);
+        }*/
     builder.init();
 
     // Now you can use debug! for debug information and info! for always relevant information
     debug!("Debug mode is on.");
     info!("Info mode is on.");
 
-    if let Some(i) = matches.value_of("OUTPUT") {
-        println!("Value for output: {}", i);
-    }
-    if let Some(i) = matches.value_of("files") {
-        let files: Vec<_> = matches.values_of("files").unwrap().collect();
-        let files_str = files.join(", ");
+    /*    if let Some(i) = matches.value_of("OUTPUT") {
+            println!("Value for output: {}", i);
+        }*/
+    if let Some(files) = matches.get_many::<String>("files") {
+        let files_vec: Vec<&String> = files.collect(); // Collect into a Vec<&String>
+        let files_str = files_vec.iter().map(AsRef::as_ref).collect::<Vec<&str>>().join(", ");
+        println!("Files: {}", files_str);
         debug!("Value for files: {}", files_str);
+
         match matches.subcommand() {
-            ("UNION", Some(_)) => {
-                perform_operation(perform_union, "Union", files.iter().map(AsRef::as_ref).collect());
+            Some(("UNION", sub_matches)) => {
+                perform_operation(perform_union, "Union", files_vec);
             }
-            ("INTERSECT", Some(_)) => {
-                perform_operation(perform_intersect, "Intersection", files.iter().map(AsRef::as_ref).collect());
+            Some(("INTERSECT", sub_matches)) => {
+                perform_operation(perform_intersect, "Intersection", files_vec.clone());
             }
-            ("DIFFERENCE", Some(_)) => {
-                perform_operation(perform_difference, "Difference", files.iter().map(AsRef::as_ref).collect());
+            Some(("DIFFERENCE", sub_matches)) => {
+                perform_operation(perform_difference, "Difference", files_vec.clone());
             }
             _ => println!("No valid subcommand was used"),
         }
+    }
+    match matches.subcommand() {
+        Some(("ABOUT", sub_matches)) => {
+            println!("{}", logo());
+        }
+        _ => println!("No valid subcommand was used"),
     }
 }
 

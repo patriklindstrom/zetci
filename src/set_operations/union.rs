@@ -7,7 +7,7 @@ const KEY_COLUMN: usize = 0;
 
 // A or B
 // perform_union should return the zets variable
-pub fn perform_union(files: Vec<&str>) -> Result<HashMap<String, String>, Box<dyn Error>> {
+pub fn perform_union(files: Vec<&String>) -> Result<HashMap<String, String>, Box<dyn Error>> {
     // Placeholder for actual union logic
     info!("Performing union operation...");
     let mut zet: HashMap<String, String> = HashMap::new();
