@@ -1,13 +1,14 @@
 [package]
 name = "zetci"
-version = "0.1.1"
-edition = "2018"
+version = "0.1.2"
+edition = "2021"
 authors = ["Patrik Lindstrom <patrik.lindstrom.dev>"]
 
 # See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
 
 [dependencies]
-clap = {version = "4.5.1"}
+clap = {version = "4.5.1", features = ["cargo"]}
+clap_generate = "3.0.3"
 csv = "1.0.0-beta.3"
 env_logger = "0.11.2"
 log = "0.4.20"
