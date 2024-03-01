@@ -8,11 +8,16 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="9c0b3c2e-243f-4e38-a4ca-ebe6171279a9" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/src/set_operations/exor.rs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Cargo.lock" beforeDir="false" afterPath="$PROJECT_DIR$/Cargo.lock" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Cargo.toml" beforeDir="false" afterPath="$PROJECT_DIR$/Cargo.toml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main.rs" beforeDir="false" afterPath="$PROJECT_DIR$/src/main.rs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/set_operations/clap_config.rs" beforeDir="false" afterPath="$PROJECT_DIR$/src/set_operations/clap_config.rs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/set_operations/exor.rs" beforeDir="false" afterPath="$PROJECT_DIR$/src/set_operations/xor.rs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/set_operations/mod.rs" beforeDir="false" afterPath="$PROJECT_DIR$/src/set_operations/mod.rs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/testdata/foo.csv" beforeDir="false" afterPath="$PROJECT_DIR$/testdata/foo.csv" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/testdata/fum.csv" beforeDir="false" afterPath="$PROJECT_DIR$/testdata/fum.csv" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tests/set_operations_test.rs" beforeDir="false" afterPath="$PROJECT_DIR$/tests/set_operations_test.rs" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -67,6 +72,7 @@
     "Cargo.Run Union.executor": "Run",
     "Cargo.Run about.executor": "Run",
     "Cargo.Run version.executor": "Run",
+    "Cargo.Run xor.executor": "Run",
     "Cargo.Run zetci.executor": "Run",
     "Cargo.Run.executor": "Run",
     "Cargo.Tests in 'tests' (1).executor": "Run",
@@ -98,7 +104,7 @@
       <recent name="D:\patli\gitrepo\zetci\src\set_operations" />
     </key>
   </component>
-  <component name="RunManager" selected="Cargo.Run About">
+  <component name="RunManager" selected="Cargo.Tests in 'tests'">
     <configuration name="Run About" type="CargoCommandRunConfiguration" factoryName="Cargo Command" folderName="meta information">
       <option name="command" value="run -- about" />
       <option name="workingDirectory" value="file://$PROJECT_DIR$/target" />
@@ -201,6 +207,23 @@
         <option name="CARGO.BUILD_TASK_PROVIDER" enabled="true" />
       </method>
     </configuration>
+    <configuration name="Run xor" type="CargoCommandRunConfiguration" factoryName="Cargo Command" folderName="SubCommands">
+      <option name="command" value="run -- xor -f ../testdata/fum.csv,../testdata/fee.csv,../testdata/foo.csv" />
+      <option name="workingDirectory" value="file://$PROJECT_DIR$/target" />
+      <envs />
+      <option name="emulateTerminal" value="true" />
+      <option name="channel" value="DEFAULT" />
+      <option name="requiredFeatures" value="true" />
+      <option name="allFeatures" value="false" />
+      <option name="withSudo" value="false" />
+      <option name="buildTarget" value="REMOTE" />
+      <option name="backtrace" value="SHORT" />
+      <option name="isRedirectInput" value="false" />
+      <option name="redirectInputPath" value="" />
+      <method v="2">
+        <option name="CARGO.BUILD_TASK_PROVIDER" enabled="true" />
+      </method>
+    </configuration>
     <configuration name="Run zetci" type="CargoCommandRunConfiguration" factoryName="Cargo Command" temporary="true">
       <option name="command" value="run --package zetci --bin zetci" />
       <option name="workingDirectory" value="file://$PROJECT_DIR$" />
@@ -240,6 +263,7 @@
       <item itemvalue="Cargo.Run About" />
       <item itemvalue="Cargo.Run version" />
       <item itemvalue="Cargo.Run diffa" />
+      <item itemvalue="Cargo.Run xor" />
       <item itemvalue="Cargo.Run Intersect" />
       <item itemvalue="Cargo.Run Union" />
       <item itemvalue="Cargo.Tests in 'tests'" />

@@ -3,7 +3,7 @@ use clap::{Arg, Command};
 pub fn cli() -> Command {
 
     Command::new("set_operations")
-        .version("0.1.0")
+        .version("0.1.1")
         .author("Patrik Lindström <patrik.lindstrom@lcube.se>")
         .about("Performs set operations on csv files")
         .arg(Arg::new("output")
@@ -32,8 +32,8 @@ pub fn cli() -> Command {
             .about("Performs difference operation on csv files")
             .version("1.0")
             .author("Patrik Lindström <patrik.lindstrom@lcube.se>"))
-        .subcommand(Command::new("exor")
-            .about("Performs an exor operation on csv files")
+        .subcommand(Command::new("xor")
+            .about("Performs an -exclusive or- operation on csv files")
             .version("1.0")
             .author("Patrik Lindström <patrik.lindstrom@lcube.se>"))
         .subcommand(Command::new("about")
