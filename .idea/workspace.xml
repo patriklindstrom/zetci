@@ -104,6 +104,7 @@
       <recent name="D:\patli\gitrepo\zetci\src\set_operations" />
     </key>
   </component>
+
   <component name="RunManager" selected="Cargo.Tests in 'tests'">
     <configuration name="Run About" type="CargoCommandRunConfiguration" factoryName="Cargo Command" folderName="meta information">
       <option name="command" value="run -- about" />

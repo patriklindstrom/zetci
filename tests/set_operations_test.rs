@@ -6,6 +6,7 @@ use zetci::set_operations::intersect::perform_intersect;
 use zetci::set_operations::union::perform_union;
 use zetci::set_operations::diffa::perform_diffa;
 use zetci::set_operations::xor::perform_xor;
+
 #[test]
 fn test_perform_union() {
     let files = vec!["./testdata/fee.csv","./testdata/foo.csv", "./testdata/fum.csv"]
