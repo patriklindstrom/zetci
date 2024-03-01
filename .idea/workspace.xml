@@ -8,7 +8,19 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="9c0b3c2e-243f-4e38-a4ca-ebe6171279a9" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/src/logo.rs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Cargo.lock" beforeDir="false" afterPath="$PROJECT_DIR$/Cargo.lock" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Cargo.toml" beforeDir="false" afterPath="$PROJECT_DIR$/Cargo.toml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/readme.md" beforeDir="false" afterPath="$PROJECT_DIR$/readme.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/clap_config.yml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/lib.rs" beforeDir="false" afterPath="$PROJECT_DIR$/src/lib.rs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main.rs" beforeDir="false" afterPath="$PROJECT_DIR$/src/main.rs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/set_operations/clap_config.rs" beforeDir="false" afterPath="$PROJECT_DIR$/src/set_operations/clap_config.rs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/set_operations/difference.rs" beforeDir="false" afterPath="$PROJECT_DIR$/src/set_operations/difference.rs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/set_operations/intersect.rs" beforeDir="false" afterPath="$PROJECT_DIR$/src/set_operations/intersect.rs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/set_operations/union.rs" beforeDir="false" afterPath="$PROJECT_DIR$/src/set_operations/union.rs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tests/set_operations_test.rs" beforeDir="false" afterPath="$PROJECT_DIR$/tests/set_operations_test.rs" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -53,40 +65,61 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;Cargo.Install grcov.executor&quot;: &quot;Run&quot;,
-    &quot;Cargo.Run Difference.executor&quot;: &quot;Run&quot;,
-    &quot;Cargo.Run Intersect.executor&quot;: &quot;Run&quot;,
-    &quot;Cargo.Run Union.executor&quot;: &quot;Run&quot;,
-    &quot;Cargo.Run zetci.executor&quot;: &quot;Run&quot;,
-    &quot;Cargo.Run.executor&quot;: &quot;Run&quot;,
-    &quot;Cargo.Tests in 'tests' (1).executor&quot;: &quot;Run&quot;,
-    &quot;Cargo.Tests in 'tests'.executor&quot;: &quot;Run&quot;,
-    &quot;Notification.DisplayName-DoNotAsk-Plugins Suggestion&quot;: &quot;Plugin suggestions available&quot;,
-    &quot;Notification.DisplayName-DoNotAsk-transferSettings&quot;: &quot;Transfer settings messages &quot;,
-    &quot;Notification.DoNotAsk-Plugins Suggestion&quot;: &quot;true&quot;,
-    &quot;Notification.DoNotAsk-transferSettings&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.rust.reset.selective.auto.import&quot;: &quot;true&quot;,
-    &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
-    &quot;git-widget-placeholder&quot;: &quot;f/rebrand&quot;,
-    &quot;ignore.virus.scanning.warn.message&quot;: &quot;true&quot;,
-    &quot;last_opened_file_path&quot;: &quot;D:/patli/gitrepo/zetci&quot;,
-    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
-    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
-    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
-    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
-    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
-    &quot;org.rust.cargo.project.model.PROJECT_DISCOVERY&quot;: &quot;true&quot;,
-    &quot;org.rust.cargo.project.model.impl.CargoExternalSystemProjectAware.subscribe.first.balloon&quot;: &quot;&quot;,
-    &quot;settings.editor.selected.configurable&quot;: &quot;preferences.lookFeel&quot;,
-    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "Cargo.Install grcov.executor": "Run",
+    "Cargo.Run About.executor": "Run",
+    "Cargo.Run Difference.executor": "Run",
+    "Cargo.Run Help.executor": "Run",
+    "Cargo.Run Intersect.executor": "Run",
+    "Cargo.Run Union.executor": "Run",
+    "Cargo.Run about.executor": "Run",
+    "Cargo.Run version.executor": "Run",
+    "Cargo.Run zetci.executor": "Run",
+    "Cargo.Run.executor": "Run",
+    "Cargo.Tests in 'tests' (1).executor": "Run",
+    "Cargo.Tests in 'tests'.executor": "Run",
+    "Notification.DisplayName-DoNotAsk-Plugins Suggestion": "Plugin suggestions available",
+    "Notification.DisplayName-DoNotAsk-transferSettings": "Transfer settings messages ",
+    "Notification.DoNotAsk-Plugins Suggestion": "true",
+    "Notification.DoNotAsk-transferSettings": "true",
+    "RunOnceActivity.OpenProjectViewOnStart": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "RunOnceActivity.rust.reset.selective.auto.import": "true",
+    "WebServerToolWindowFactoryState": "false",
+    "git-widget-placeholder": "f/rebrand",
+    "ignore.virus.scanning.warn.message": "true",
+    "last_opened_file_path": "D:/patli/gitrepo/zetci",
+    "node.js.detected.package.eslint": "true",
+    "node.js.detected.package.tslint": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
+    "node.js.selected.package.tslint": "(autodetect)",
+    "nodejs_package_manager_path": "npm",
+    "org.rust.cargo.project.model.PROJECT_DISCOVERY": "true",
+    "org.rust.cargo.project.model.impl.CargoExternalSystemProjectAware.subscribe.first.balloon": "",
+    "settings.editor.selected.configurable": "preferences.lookFeel",
+    "vue.rearranger.settings.migration": "true"
   }
-}</component>
-  <component name="RunManager" selected="Cargo.Tests in 'tests'">
-    <configuration name="Run Difference" type="CargoCommandRunConfiguration" factoryName="Cargo Command">
+}]]></component>
+  <component name="RunManager" selected="Cargo.Run Difference">
+    <configuration name="Run About" type="CargoCommandRunConfiguration" factoryName="Cargo Command" folderName="meta information">
+      <option name="command" value="run -- ABOUT" />
+      <option name="workingDirectory" value="file://$PROJECT_DIR$/target" />
+      <envs />
+      <option name="emulateTerminal" value="true" />
+      <option name="channel" value="DEFAULT" />
+      <option name="requiredFeatures" value="true" />
+      <option name="allFeatures" value="false" />
+      <option name="withSudo" value="false" />
+      <option name="buildTarget" value="REMOTE" />
+      <option name="backtrace" value="SHORT" />
+      <option name="isRedirectInput" value="false" />
+      <option name="redirectInputPath" value="" />
+      <method v="2">
+        <option name="CARGO.BUILD_TASK_PROVIDER" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="Run Difference" type="CargoCommandRunConfiguration" factoryName="Cargo Command" folderName="SubCommands">
       <option name="command" value="run -- -f ../testdata/fum.csv ../testdata/fee.csv  -o ../testdata/test.csv DIFFERENCE" />
       <option name="workingDirectory" value="file://$PROJECT_DIR$/target" />
       <envs />
@@ -103,7 +136,24 @@
         <option name="CARGO.BUILD_TASK_PROVIDER" enabled="true" />
       </method>
     </configuration>
-    <configuration name="Run Intersect" type="CargoCommandRunConfiguration" factoryName="Cargo Command">
+    <configuration name="Run Help" type="CargoCommandRunConfiguration" factoryName="Cargo Command" folderName="meta information">
+      <option name="command" value="run -- help" />
+      <option name="workingDirectory" value="file://$PROJECT_DIR$/target" />
+      <envs />
+      <option name="emulateTerminal" value="true" />
+      <option name="channel" value="DEFAULT" />
+      <option name="requiredFeatures" value="true" />
+      <option name="allFeatures" value="false" />
+      <option name="withSudo" value="false" />
+      <option name="buildTarget" value="REMOTE" />
+      <option name="backtrace" value="SHORT" />
+      <option name="isRedirectInput" value="false" />
+      <option name="redirectInputPath" value="" />
+      <method v="2">
+        <option name="CARGO.BUILD_TASK_PROVIDER" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="Run Intersect" type="CargoCommandRunConfiguration" factoryName="Cargo Command" folderName="SubCommands">
       <option name="command" value="run -- -f ../testdata/fee.csv ../testdata/foo.csv ../testdata/fum.csv -o ../testdata/test.csv INTERSECT" />
       <option name="workingDirectory" value="file://$PROJECT_DIR$/target" />
       <envs />
@@ -120,8 +170,25 @@
         <option name="CARGO.BUILD_TASK_PROVIDER" enabled="true" />
       </method>
     </configuration>
-    <configuration name="Run Union" type="CargoCommandRunConfiguration" factoryName="Cargo Command">
+    <configuration name="Run Union" type="CargoCommandRunConfiguration" factoryName="Cargo Command" folderName="SubCommands">
       <option name="command" value="run --  -f ../testdata/fee.csv ../testdata/foo.csv ../testdata/fum.csv -o ../testdata/test.csv UNION " />
+      <option name="workingDirectory" value="file://$PROJECT_DIR$/target" />
+      <envs />
+      <option name="emulateTerminal" value="true" />
+      <option name="channel" value="DEFAULT" />
+      <option name="requiredFeatures" value="true" />
+      <option name="allFeatures" value="false" />
+      <option name="withSudo" value="false" />
+      <option name="buildTarget" value="REMOTE" />
+      <option name="backtrace" value="SHORT" />
+      <option name="isRedirectInput" value="false" />
+      <option name="redirectInputPath" value="" />
+      <method v="2">
+        <option name="CARGO.BUILD_TASK_PROVIDER" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="Run version" type="CargoCommandRunConfiguration" factoryName="Cargo Command" folderName="meta information">
+      <option name="command" value="run -- --version" />
       <option name="workingDirectory" value="file://$PROJECT_DIR$/target" />
       <envs />
       <option name="emulateTerminal" value="true" />
@@ -172,6 +239,9 @@
       </method>
     </configuration>
     <list>
+      <item itemvalue="Cargo.Run Help" />
+      <item itemvalue="Cargo.Run About" />
+      <item itemvalue="Cargo.Run version" />
       <item itemvalue="Cargo.Run Difference" />
       <item itemvalue="Cargo.Run Intersect" />
       <item itemvalue="Cargo.Run Union" />
@@ -209,6 +279,8 @@
       <workItem from="1709149358848" duration="39000" />
       <workItem from="1709149416827" duration="1547000" />
       <workItem from="1709151067803" duration="111000" />
+      <workItem from="1709240354557" duration="31000" />
+      <workItem from="1709240400029" duration="13836000" />
     </task>
     <servers />
   </component>
@@ -225,6 +297,17 @@
         </entry>
       </map>
     </option>
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <line-breakpoint enabled="true" type="com.jetbrains.cidr.execution.debugger.OCBreakpointType">
+          <url>file://$PROJECT_DIR$/src/logo.rs</url>
+          <line>1</line>
+          <option name="timeStamp" value="1" />
+        </line-breakpoint>
+      </breakpoints>
+    </breakpoint-manager>
   </component>
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
     <SUITE FILE_PATH="coverage/zet_cmder$Tests_in__tests_.info" NAME="Tests in 'tests' Coverage Results" MODIFIED="1708980066524" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="RsCoverageRunner" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" CONTEXT_FILE_PATH="D:\patli\gitrepo\zetci\target" />

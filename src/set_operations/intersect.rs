@@ -8,7 +8,7 @@ We first create a counts hashmap to keep track of the count of each key across a
  Then, we read each file into the zet hashmap and increment the count of each key in the counts hashmap.
  Finally, we retain only the keys in zet whose count is equal to the number of files.
  This ensures that only the keys that exist in all files are retained.*/
-pub fn perform_intersect(files: Vec<&str>) -> Result<HashMap<String, String>, Box<dyn Error>> {
+pub fn perform_intersect(files: Vec<&String>) -> Result<HashMap<String, String>, Box<dyn Error>> {
     info!("Performing intersect operation...");
     let mut counts: HashMap<String, usize> = HashMap::new();
     let mut zet: HashMap<String, String> = HashMap::new();

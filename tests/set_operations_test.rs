@@ -7,8 +7,12 @@ use zetci::set_operations::union::perform_union;
 use zetci::set_operations::difference::perform_difference;
 #[test]
 fn test_perform_union() {
-    let files = vec!["./testdata/fee.csv","./testdata/foo.csv", "./testdata/fum.csv"];
-    let result = perform_union(files).unwrap();
+    let files = vec!["./testdata/fee.csv","./testdata/foo.csv", "./testdata/fum.csv"]
+        .iter()
+        .map(|&s| s.to_string())
+        .collect::<Vec<String>>();
+    let files_ref = files.iter().collect::<Vec<&String>>();
+    let result = perform_union(files_ref).unwrap();
 let expected: HashMap<String, String> = [
     ("0", "0,Lilith,Larsson,6000 m,16 min 2 s,Bare"),
     ("1", "1,Adam,Svensson,3000 m,12 min 30 s,Nike"),
@@ -23,8 +27,12 @@ let expected: HashMap<String, String> = [
 }
 #[test]
 fn test_perform_intersect() {
-    let files = vec!["./testdata/fee.csv","./testdata/foo.csv"];
-    let result = perform_intersect(files).unwrap();
+    let files = vec!["./testdata/fee.csv","./testdata/foo.csv"]
+        .iter()
+        .map(|&s| s.to_string())
+        .collect::<Vec<String>>();
+    let files_ref = files.iter().collect::<Vec<&String>>();
+    let result = perform_intersect(files_ref).unwrap();
     let expected: HashMap<String, String> = [
         ("4", "4,Olle,Lindström,3000,10 min 22 s,Na"),
         ("5", "5,Emma,Olsson,2000 m,11 min 25 s,Nike"),
@@ -34,8 +42,12 @@ fn test_perform_intersect() {
 
 #[test]
 fn test_perform_difference() {
-    let files = vec!["./testdata/fum.csv","./testdata/fee.csv"];
-    let result = perform_difference(files).unwrap();
+    let files = vec!["./testdata/fum.csv","./testdata/fee.csv"]
+        .iter()
+        .map(|&s| s.to_string())
+        .collect::<Vec<String>>();
+    let files_ref = files.iter().collect::<Vec<&String>>();
+    let result = perform_difference(files_ref).unwrap();
     let expected: HashMap<String, String> = [
         ("1", "1,Adam,Svensson,3000 m,12 min 30 s,Nike"),
         ("2", "2,Bertil,Svensson,6000 m,27 min 5 s,Adidas"),
