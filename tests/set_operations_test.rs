@@ -4,7 +4,7 @@ use std::collections::HashMap;
 use zetci::set_operations::intersect::perform_intersect;
 // Add reference to the pub function pub fn perform_union in the module under src/set_operations/union.rs
 use zetci::set_operations::union::perform_union;
-use zetci::set_operations::difference::perform_difference;
+use zetci::set_operations::diffa::perform_diffa;
 #[test]
 fn test_perform_union() {
     let files = vec!["./testdata/fee.csv","./testdata/foo.csv", "./testdata/fum.csv"]
@@ -47,7 +47,7 @@ fn test_perform_difference() {
         .map(|&s| s.to_string())
         .collect::<Vec<String>>();
     let files_ref = files.iter().collect::<Vec<&String>>();
-    let result = perform_difference(files_ref).unwrap();
+    let result = perform_diffa(files_ref).unwrap();
     let expected: HashMap<String, String> = [
         ("1", "1,Adam,Svensson,3000 m,12 min 30 s,Nike"),
         ("2", "2,Bertil,Svensson,6000 m,27 min 5 s,Adidas"),

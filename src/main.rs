@@ -17,7 +17,7 @@ use env_logger::Builder;
 use std::error::Error;
 use std::process;
 use set_operations::union::perform_union;
-use set_operations::difference::perform_difference;
+use set_operations::diffa::perform_diffa;
 use set_operations::intersect::perform_intersect;
 use logo::logo;
 use crate::set_operations::clap_config::cli;
@@ -70,20 +70,20 @@ fn main() {
         debug!("Value for files: {}", files_str);
 
         match matches.subcommand() {
-            Some(("UNION", sub_matches)) => {
+            Some(("union", sub_matches)) => {
                 perform_operation(perform_union, "Union", files_vec);
             }
-            Some(("INTERSECT", sub_matches)) => {
+            Some(("intersect", sub_matches)) => {
                 perform_operation(perform_intersect, "Intersection", files_vec.clone());
             }
-            Some(("DIFFERENCE", sub_matches)) => {
-                perform_operation(perform_difference, "Difference", files_vec.clone());
+            Some(("diffa", sub_matches)) => {
+                perform_operation(perform_diffa, "Difference", files_vec.clone());
             }
             _ => println!("No valid subcommand was used"),
         }
     }
     match matches.subcommand() {
-        Some(("ABOUT", sub_matches)) => {
+        Some(("about", sub_matches)) => {
             println!("{}", logo());
         }
         _ => println!("No valid subcommand was used"),

@@ -8,18 +8,11 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="9c0b3c2e-243f-4e38-a4ca-ebe6171279a9" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/src/logo.rs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Cargo.lock" beforeDir="false" afterPath="$PROJECT_DIR$/Cargo.lock" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Cargo.toml" beforeDir="false" afterPath="$PROJECT_DIR$/Cargo.toml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/readme.md" beforeDir="false" afterPath="$PROJECT_DIR$/readme.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/clap_config.yml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/lib.rs" beforeDir="false" afterPath="$PROJECT_DIR$/src/lib.rs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main.rs" beforeDir="false" afterPath="$PROJECT_DIR$/src/main.rs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/set_operations/clap_config.rs" beforeDir="false" afterPath="$PROJECT_DIR$/src/set_operations/clap_config.rs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/set_operations/difference.rs" beforeDir="false" afterPath="$PROJECT_DIR$/src/set_operations/difference.rs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/set_operations/intersect.rs" beforeDir="false" afterPath="$PROJECT_DIR$/src/set_operations/intersect.rs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/set_operations/union.rs" beforeDir="false" afterPath="$PROJECT_DIR$/src/set_operations/union.rs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/set_operations/difference.rs" beforeDir="false" afterPath="$PROJECT_DIR$/src/set_operations/diffa.rs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/set_operations/mod.rs" beforeDir="false" afterPath="$PROJECT_DIR$/src/set_operations/mod.rs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/tests/set_operations_test.rs" beforeDir="false" afterPath="$PROJECT_DIR$/tests/set_operations_test.rs" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -87,7 +80,7 @@
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "RunOnceActivity.rust.reset.selective.auto.import": "true",
     "WebServerToolWindowFactoryState": "false",
-    "git-widget-placeholder": "f/rebrand",
+    "git-widget-placeholder": "f/add-exor",
     "ignore.virus.scanning.warn.message": "true",
     "last_opened_file_path": "D:/patli/gitrepo/zetci",
     "node.js.detected.package.eslint": "true",
@@ -101,26 +94,9 @@
     "vue.rearranger.settings.migration": "true"
   }
 }]]></component>
-  <component name="RunManager" selected="Cargo.Run Difference">
+  <component name="RunManager" selected="Cargo.Run About">
     <configuration name="Run About" type="CargoCommandRunConfiguration" factoryName="Cargo Command" folderName="meta information">
-      <option name="command" value="run -- ABOUT" />
-      <option name="workingDirectory" value="file://$PROJECT_DIR$/target" />
-      <envs />
-      <option name="emulateTerminal" value="true" />
-      <option name="channel" value="DEFAULT" />
-      <option name="requiredFeatures" value="true" />
-      <option name="allFeatures" value="false" />
-      <option name="withSudo" value="false" />
-      <option name="buildTarget" value="REMOTE" />
-      <option name="backtrace" value="SHORT" />
-      <option name="isRedirectInput" value="false" />
-      <option name="redirectInputPath" value="" />
-      <method v="2">
-        <option name="CARGO.BUILD_TASK_PROVIDER" enabled="true" />
-      </method>
-    </configuration>
-    <configuration name="Run Difference" type="CargoCommandRunConfiguration" factoryName="Cargo Command" folderName="SubCommands">
-      <option name="command" value="run -- -f ../testdata/fum.csv ../testdata/fee.csv  -o ../testdata/test.csv DIFFERENCE" />
+      <option name="command" value="run -- about" />
       <option name="workingDirectory" value="file://$PROJECT_DIR$/target" />
       <envs />
       <option name="emulateTerminal" value="true" />
@@ -154,7 +130,7 @@
       </method>
     </configuration>
     <configuration name="Run Intersect" type="CargoCommandRunConfiguration" factoryName="Cargo Command" folderName="SubCommands">
-      <option name="command" value="run -- -f ../testdata/fee.csv ../testdata/foo.csv ../testdata/fum.csv -o ../testdata/test.csv INTERSECT" />
+      <option name="command" value="run -- -f ../testdata/fee.csv,../testdata/foo.csv,../testdata/fum.csv  intersect" />
       <option name="workingDirectory" value="file://$PROJECT_DIR$/target" />
       <envs />
       <option name="emulateTerminal" value="true" />
@@ -171,7 +147,24 @@
       </method>
     </configuration>
     <configuration name="Run Union" type="CargoCommandRunConfiguration" factoryName="Cargo Command" folderName="SubCommands">
-      <option name="command" value="run --  -f ../testdata/fee.csv ../testdata/foo.csv ../testdata/fum.csv -o ../testdata/test.csv UNION " />
+      <option name="command" value="run -- union --files ../testdata/fee.csv,../testdata/foo.csv,../testdata/fum.csv -o ../testdata/test.csv   " />
+      <option name="workingDirectory" value="file://$PROJECT_DIR$/target" />
+      <envs />
+      <option name="emulateTerminal" value="true" />
+      <option name="channel" value="DEFAULT" />
+      <option name="requiredFeatures" value="true" />
+      <option name="allFeatures" value="false" />
+      <option name="withSudo" value="false" />
+      <option name="buildTarget" value="REMOTE" />
+      <option name="backtrace" value="SHORT" />
+      <option name="isRedirectInput" value="false" />
+      <option name="redirectInputPath" value="" />
+      <method v="2">
+        <option name="CARGO.BUILD_TASK_PROVIDER" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="Run diffa" type="CargoCommandRunConfiguration" factoryName="Cargo Command" folderName="SubCommands">
+      <option name="command" value="run -- diffa -f ../testdata/fum.csv,../testdata/fee.csv" />
       <option name="workingDirectory" value="file://$PROJECT_DIR$/target" />
       <envs />
       <option name="emulateTerminal" value="true" />
@@ -242,7 +235,7 @@
       <item itemvalue="Cargo.Run Help" />
       <item itemvalue="Cargo.Run About" />
       <item itemvalue="Cargo.Run version" />
-      <item itemvalue="Cargo.Run Difference" />
+      <item itemvalue="Cargo.Run diffa" />
       <item itemvalue="Cargo.Run Intersect" />
       <item itemvalue="Cargo.Run Union" />
       <item itemvalue="Cargo.Tests in 'tests'" />
@@ -312,5 +305,6 @@
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
     <SUITE FILE_PATH="coverage/zet_cmder$Tests_in__tests_.info" NAME="Tests in 'tests' Coverage Results" MODIFIED="1708980066524" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="RsCoverageRunner" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" CONTEXT_FILE_PATH="D:\patli\gitrepo\zetci\target" />
     <SUITE FILE_PATH="coverage/zet_cmder$Run_Union.info" NAME="Run Union Coverage Results" MODIFIED="1708977587635" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="RsCoverageRunner" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" CONTEXT_FILE_PATH="D:\patli\gitrepo\zetci\target" />
+    <SUITE FILE_PATH="coverage/zetci$Tests_in__tests_.info" NAME="Tests in 'tests' Coverage Results" MODIFIED="1709303990425" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="RsCoverageRunner" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" CONTEXT_FILE_PATH="D:\patli\gitrepo\zetci\target" />
   </component>
 </project>
