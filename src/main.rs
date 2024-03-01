@@ -5,7 +5,6 @@
 // ../testdata/union_output.csv union
 #![allow(unused_variables)]
 
-extern crate clap;
 extern crate csv;
 
 pub mod set_operations;

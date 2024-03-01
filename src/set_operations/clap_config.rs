@@ -1,9 +1,7 @@
-use clap::{Arg, Command};
-
+use clap::{Command, Arg,crate_version};
 pub fn cli() -> Command {
-
     Command::new("set_operations")
-        .version("0.1.1")
+        .version(crate_version!())
         .author("Patrik Lindström <patrik.lindstrom@lcube.se>")
         .about("Performs set operations on csv files")
         .arg(Arg::new("output")
