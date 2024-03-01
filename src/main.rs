@@ -19,7 +19,7 @@ use std::process;
 use set_operations::union::perform_union;
 use set_operations::diffa::perform_diffa;
 use set_operations::intersect::perform_intersect;
-use set_operations::exor::perform_exor;
+use set_operations::xor::perform_xor;
 use logo::logo;
 use crate::set_operations::clap_config::cli;
 
@@ -80,8 +80,8 @@ fn main() {
             Some(("diffa", sub_matches)) => {
                 perform_operation(perform_diffa, "Difference", files_vec.clone());
             }
-            Some(("exor", sub_matches)) => {
-                perform_operation(perform_exor, "Difference", files_vec.clone());
+            Some(("xor", sub_matches)) => {
+                perform_operation(perform_xor, "Xor", files_vec.clone());
             }
             _ => println!("No valid subcommand was used"),
         }
