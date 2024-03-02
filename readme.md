@@ -1,5 +1,7 @@
 **tl;dr This cmd program can compare text files and find what rows are the
-same or differ**
+same or differ according to different set commands. It can handle bigfiles, but it is all in ram**
+Link to webpage [zetci](https://zetci.com) with tutorials, examples, videos and more.
+
 ```
 
                                                      ...............................................
@@ -36,13 +38,52 @@ same or differ**
 
 ```
 # Readme zetci
-
+** This is in status WIP it is not done yet   **
 # How to use it
+## Installation
+### Windows
+Download the latest release from [releases]() and unzip it to a folder and add
+the folder to the path.
+### Linux
+Download the latest release from [releases]() and unzip it to a folder and add
+the folder to the path.
+### Mac OS
+Download the latest release from [releases]() and unzip it to a folder and add  the folder to the path.
+## Usage
+zetci union --files fileA.csv,fileB.csv,fileC.csv --output ~/temp/what-is-both.csv   
+zetci intersect --files fileA.csv,fileB.csv,fileC.csv --output ~/temp/whats-the-same.csv
+zetci diffa --files fileA.csv,fileB.csv --output ~/temp/whats-diff.csv
+zetci except --files fileA.csv,fileB.csv --output ~/temp/whats-except.csv
+zetci  xor --files fileA.csv,fileB.csv --output ~/temp/whats-only-in-one.csv
+
 ## What problem does it solve?
 When you have data in two or more files and want to extract parts of if. In
 similar way that you would from a sql database. It could be only the unique
 rows in several files or the differences between two files or what has been
 added to a file compared to previous version.
+
+## What is the target audience?
+Somewhat familiar with running programs from the command line. Also good if you have a basic knowledge of how
+ set theory. It could be  Sowftware developers, data analysts, data scientists, data engineers or anyone one 
+that has to work with data in textfiles and do not have access to a sql database or it is a one time analysis.
+## What are the use case?
+You have two or more files with data and you want to extract parts of it. 
+Some examples could be:
+* You have a file with all your customers and a file with all your orders and
+  you want to see what customers that has not made any orders.
+* Someone sent you a file with all the customers that has made an order and you
+  want to see what customers that are not in your system.
+* Someone has sent you a file with all the members of a club and you want to
+  see what members that has been added since last time.
+* You have a file with all the members of a club and a file with all the
+  members of a club and you want to see what members that are in both files.
+* You have a file with all the members of a club and a file with all the
+  members of a club and you want to see what members that are in one file but
+  not in the other.
+* You have a really big file and you want to see what rows that are unique in
+  that file.
+* You want to import data from a file to a sql database but only the new rows
+  that has been added since last time.
 
 ## Why not use a sql database ?
 Absolutely if you have sql database use that. But if you do not have access to
@@ -75,8 +116,9 @@ files which in this case is just fileA.csv
 * **files** Sets the input file to use
 * **union** Performs union operation on csv files
 * **intersect** Performs intersection operation on csv files
-* **difference**  Performs difference operation on csv files
-
+* **diffa**  Performs difference operation on csv files
+* **xor**  Performs difference operation on csv files
+* 
 # About sets and its operations
 We want eg the following set operations:
 not A and B => DiffFile  see [Explanation of expression](http://www.wolframalpha.com/input/?i=not+A+and+B "link to Wolframealpha") or see more easily [Venn diagram](http://www.wolframalpha.com/share/clip?f=d41d8cd98f00b204e9800998ecf8427e41kvo33uui "link to graph on Wolframealpha")
