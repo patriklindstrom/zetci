@@ -1,7 +1,7 @@
 **tl;dr This cmd program can compare text files and find what rows are the
 same or differ according to different set commands. It can handle bigfiles, but it is all in ram**
 Link to webpage [zetci](https://zetci.com) with tutorials, examples, videos and more.
-
+Code: [github](https://github.com/patriklindstrom/zetci)
 ```
 
                                                      ...............................................
@@ -131,6 +131,7 @@ Make an intersection between file a and b the key are in column 4,6,7 seperator 
 > zetci -v -i -a"s:\Darkcompare\A_TestFile.cs"  -b"s:\Darkcompare\B_TestFile.cs" -k4 6 7 -s;
 Shown in Venn Diagram it would be:
 ![Link to Venn Diagagram showing A and B](http://i.imgur.com/lNnPvV2.png)
+
 In pseudo SQL it would be something like:
 > SELECT a.* from A_TestFile as a INNER JOIN B_TestFile as b on a.k4=b.k4 and a.k6=b.k6 and a.k7=b.k7
 
@@ -139,8 +140,15 @@ On the two sets A_TestFile and B_TestFile defined by the key on column 1 and 2 w
 make sets that are DiffB and DiffA and the intersection of the two. Describe all in a verbose style.
 >zetci -v  -a".\A_TestFile.csv"  -b".\B_TestFile.csv" -k1 2 -s; -r -d -i
 
-In Venn Diagram
-DiffB  ![Venn Diagram Showing DiffB operation](http://i.imgur.com/Ig0o6mf.png), DiffA ![Venn diagram DiffA](http://i.imgur.com/9DK6QlX.png), Intersection ![Link to Venn Diagagram showing A and B](http://i.imgur.com/lNnPvV2.png)
+In Venn Diagram it would be:
+
+ DiffB  ![Venn Diagram Showing DiffB operation](http://i.imgur.com/Ig0o6mf.png)
+
+
+
+DiffA ![Venn diagram DiffA](http://i.imgur.com/9DK6QlX.png), 
+
+Intersection ![Link to Venn Diagagram showing A and B](http://i.imgur.com/lNnPvV2.png)
 
 In pseudo SQL it would be something like:
 > SELECT b.* from B_TestFile as b  WHERE b.key_1_2 not in (Select a.key_1_2 from A_TestFile as a)
@@ -150,6 +158,33 @@ DiffA
 
 Intersection
 > SELECT a.* from A_TestFile as a  INNER JOIN B_TestFile as b ON (a.key_1_2 = b.key_1_2 )
+
+# How to report bugs
+## Where to report bugs
+Use the [issue tracker]()
+Check if the bug is already reported. If it is not then create a new issue.
+## What to include in the bug report
+* What command and parameter you used
+* What you expected to happen
+* What happened
+* Testdata if possible
+* What operating system you are using
+* What version of zetci you are using
+
+# How to get help
+## Where to get help
+* [zetci.com](https://zetci.com)
+## What to include in the help request
+* What command and parameter you used
+* What you expected to happen
+* What happened
+* Testdata if possible
+
+# Feature request
+## What to include in the feature request
+* What you want to do
+* Why you want to do it
+* How you think it should be done
 
 # How is the program written
 ## Testdriven
@@ -162,24 +197,51 @@ Intersection
 # Roadmap
 ## Goals of this program.
 ### What it should be good at.
-Fast, simple
-### What is not should be good at.
-Compete with sql databases
-## Features Request.
+Fast, simple, small footprint, easy to use, easy to understand.
+### What it not should be good at.
+Compete with sql databases.
+## My own Features Request.
 ### Sort output file
 ### Define multiple columns as key
 ### Compress large files data
 ### Guess format of datafiles when you use keys
 ### Parallelize the workload, eg read files in parallel, hashmaps in parallel.
 ## Todos
-checkout right hash algoritmh. The default one for hashmap is not great for
-small och large date. 
+checkout right hash algorithm. The default one for hashmap is not great for
+small or large date. 
 # How to contribute
-## These are the groundrules
+Clone the repository and make a pull request.
+The code is written in Rust and the tests are written in Rust.
+To clone the repository and run the tests do the following:
+```
+git clone 
+cd zetci
+cargo test
+```
+Make sure all tests pass before you make a pull request.
+## What to include in the pull request
+* What you have done
+* Why you have done it
+* How you have done it
+* Example of how to use the new feature
+* Test data if possible
+
+## These are the ground rules
+* Banter and jokes are fine,  but keep it zetci.
+* Do not be a jerk.
+* Do not make Pull requests that breaks the build.
+* Do not make Pull requests that do not have tests.
+* Do not make Pull requests that do not have documentation.
+* Do not make Pull requests just to practise git.
+* Do not make Pull requests just to practise Pull requests.
+* If you are allowed to wear a gun in your country, 
+you can  wear a gun while making a pull request to this project. 
+(That is if you are in your country while making the pull request)
+* Other than that, go wild.
 
 # Dev notes
-to test params cargo run -- --files ./testdata/fee.csv ./testdata/foo.csv
-./target/debug/zetci   --files './testdata/fee.csv' './testdata/foo.csv' union
+to test params cargo run -- --files ./testdata/fee.csv,./testdata/foo.csv
+./target/debug/zetci union  --files './testdata/fee.csv','./testdata/foo.csv' 
 
                 // TODO: Add function that takes array of hashmaps with data from files and
                 // performs the operation union on them. move function later to library.
