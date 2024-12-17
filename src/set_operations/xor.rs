@@ -1,27 +1,33 @@
-
+use crate::set_operations::utils::read_data_file;
+use log::info;
 use std::collections::HashMap;
 use std::error::Error;
-use log::info;
-use crate::set_operations::utils::{read_data_file};
+
 const KEY_COLUMN: usize = 0;
-static ONE: usize = 1;
-static NO_FOUND_IN_FILES: Option<&usize> = Some(&ONE);
-// A or B
-// perform_union should return the zets variable
+
+/// Performs the XOR (symmetric difference) operation across multiple files.
+/// Includes keys that appear in an odd number of files.
 pub fn perform_xor(files: Vec<&String>) -> Result<HashMap<String, String>, Box<dyn Error>> {
-    // Placeholder for actual union logic
-    info!("Performing xor operation...");
-    let mut counts: HashMap<String, usize> = HashMap::new();
-    let mut zet: HashMap<String, String> = HashMap::new();
+    info!("Performing XOR operation...");
+
+    let mut counts: HashMap<String, usize> = HashMap::new(); // Tracks how many times each key appears
+    let mut zet: HashMap<String, String> = HashMap::new(); // Holds the final XOR results
+
+    // Iterate through each file and read the data
     for f in &files {
         info!("Opening file: {}", f);
-        let d_set = read_data_file(f.to_string(), KEY_COLUMN).expect("Cant handle file");
+        let d_set = read_data_file(f.to_string(), KEY_COLUMN).expect("Cannot handle file");
+
+        // Update counts and zet for each key-value pair
         for (key, value) in d_set {
-            *counts.entry(key.clone()).or_insert(0) += 1;
-            zet.insert(key, value);
+            *counts.entry(key.clone()).or_insert(0) += 1; // Increment key count
+            zet.entry(key).or_insert(value); // Insert the key-value pair into zet if not already present
         }
     }
-    zet.retain(|key, _| counts.get(key) == NO_FOUND_IN_FILES);
 
+    // Retain only keys that appear in an odd number of files
+    zet.retain(|key, _| counts.get(key).map(|count| count % 2 == 1).unwrap_or(false));
+
+    info!("Number of keys in XOR result: {}", zet.len());
     Ok(zet)
 }
