@@ -21,7 +21,7 @@ pub fn perform_xor(files: Vec<&String>) -> Result<HashMap<String, String>, Box<d
         // Update counts and zet for each key-value pair
         for (key, value) in d_set {
             *counts.entry(key.clone()).or_insert(0) += 1; // Increment key count
-            zet.entry(key).or_insert(value); // Insert the key-value pair into zet if not already present
+            zet.insert(key, value); // Always update the value
         }
     }
 
