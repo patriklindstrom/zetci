@@ -67,7 +67,7 @@ fn test_perform_xor_two_sets() {
         .map(|&s| s.to_string())
         .collect::<Vec<String>>();
     let files_ref = files.iter().collect::<Vec<&String>>();
-    let result = perform_xor(files_ref).unwrap();
+    let result = perform_xor(files_ref, "first").unwrap();
 
     // Convert result HashMap into a sorted Vec<(String, String)>
     let mut result_vec: Vec<(String, String)> = result.into_iter().collect();
@@ -99,7 +99,7 @@ fn test_perform_xor_three_files() {
         .map(|&s| s.to_string())
         .collect::<Vec<String>>();
     let files_ref = files.iter().collect::<Vec<&String>>();
-    let result = perform_xor(files_ref).unwrap();
+    let result = perform_xor(files_ref, "first").unwrap();
     let expected: HashMap<String, String> = [
         ("7","7,Hampus,Olsson,1000 m,8 min 15 s,Nike"),
         ("8","8,Zorro,Collie,1000 m,3 min 11 s,Tass"),
@@ -116,7 +116,7 @@ fn test_perform_xor_four_sets() {
         .map(|&s| s.to_string())
         .collect::<Vec<String>>();
     let files_ref = files.iter().collect::<Vec<&String>>();
-    let result = perform_xor(files_ref).unwrap();
+    let result = perform_xor(files_ref, "first").unwrap();
     let expected: HashMap<String, String> = [
         ("0", "0,Lilith,Larsson,6000 m,16 min 2 s,Bare"),  // From `fum.csv`
         ("1", "1,Adam,Svensson,3000 m,12 min 30 s,Nike"),  // From `fum.csv`
@@ -129,3 +129,95 @@ fn test_perform_xor_four_sets() {
     ].iter().map(|(k, v)| (k.to_string(), v.to_string())).collect();
     assert_eq!(result, expected, "The Exclusive Or of the three files fum.csv fee.csv and foo.csv should be the keys 7,8,9");
 }
+    
+
+    #[test]
+    fn test_perform_xor_with_first_strategy() {
+    let files = vec!["./testdata/fum.csv", "./testdata/foo.csv"]
+        .iter()
+        .map(|&s| s.to_string())
+        .collect::<Vec<String>>();
+    let files_ref = files.iter().collect::<Vec<&String>>();
+    
+    let result = perform_xor(files_ref, "first").unwrap();
+    
+    // Key "0" appears in both fum.csv and foo.csv with different values
+    // With "first" strategy, we expect the value from fum.csv
+    assert_eq!(
+        result.get("0").unwrap(),
+        "0,Lilith,Larsson,6000 m,16 min 2 s,Bare"
+    );
+    }
+    
+    #[test]
+    fn test_perform_xor_with_last_strategy() {
+        let files = vec!["./testdata/fum.csv", "./testdata/foo.csv"]
+            .iter()
+            .map(|&s| s.to_string())
+            .collect::<Vec<String>>();
+        let files_ref = files.iter().collect::<Vec<&String>>();
+        
+        let result = perform_xor(files_ref, "last").unwrap();
+        
+        // Checking keys that appear in only one file
+        // Key "0" appears only in fum.csv
+        assert_eq!(
+            result.get("0").unwrap(),
+            "0,Lilith,Larsson,6000 m,16 min 2 s,Bare"
+        );
+        
+        // Key "9" appears only in foo.csv
+        assert_eq!(
+            result.get("9").unwrap(),
+            "9,Jane,Lindstrom,500 m,4 min 47 s,Sandal"
+        );
+        
+        // Make sure keys in both files (1,2,3,4,5) are not in the result
+        assert!(result.get("1").is_none());
+        assert!(result.get("2").is_none());
+        assert!(result.get("3").is_none());
+        assert!(result.get("4").is_none());
+        assert!(result.get("5").is_none());
+    }
+    
+    #[test]
+    fn test_perform_xor_with_concat_strategy() {
+        let files = vec!["./testdata/fum.csv", "./testdata/foo.csv"]
+            .iter()
+            .map(|&s| s.to_string())
+            .collect::<Vec<String>>();
+        let files_ref = files.iter().collect::<Vec<&String>>();
+        
+        let result = perform_xor(files_ref, "concat").unwrap();
+        
+        // Check keys that appear in only one file
+        assert_eq!(
+            result.get("0").unwrap(),
+            "0,Lilith,Larsson,6000 m,16 min 2 s,Bare"
+        );
+        
+        assert_eq!(
+            result.get("9").unwrap(),
+            "9,Jane,Lindstrom,500 m,4 min 47 s,Sandal"
+        );
+    }
+    
+    #[test]
+    fn test_perform_xor_invalid_strategy() {
+        let files = vec!["./testdata/fum.csv", "./testdata/foo.csv"]
+            .iter()
+            .map(|&s| s.to_string())
+            .collect::<Vec<String>>();
+        let files_ref = files.iter().collect::<Vec<&String>>();
+        
+        // Invalid strategy should default to "first"
+        let result = perform_xor(files_ref, "invalid_strategy").unwrap();
+        
+        // Check a key that appears in only one file
+        assert_eq!(
+            result.get("0").unwrap(),
+            "0,Lilith,Larsson,6000 m,16 min 2 s,Bare"
+        );
+    }
+
+

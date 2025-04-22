@@ -1,4 +1,4 @@
-use clap::{crate_version, Arg, Command};
+use clap::{crate_version, Arg, Command, arg};
 pub fn cli() -> Command {
     Command::new("set_operations")
         .version(crate_version!())
@@ -33,7 +33,7 @@ pub fn cli() -> Command {
             Command::new("intersect")
                 .about("Performs intersection operation on csv files")
                 .version("1.0")
-                .author("Patrik Lindström <patrik.lindstrom@lcube.se>"),
+                .author("Patrik Lindström <patrik.lindstrom@lcube.se>")
         )
         .subcommand(
             Command::new("diffa")
@@ -45,7 +45,16 @@ pub fn cli() -> Command {
             Command::new("xor")
                 .about("Performs an -exclusive or- operation on csv files")
                 .version("1.0")
-                .author("Patrik Lindström <patrik.lindstrom@lcube.se>"),
+                .author("Patrik Lindström <patrik.lindstrom@lcube.se>")
+                .arg(
+                    Arg::new("value-strategy")
+                        .short('s')
+                        .long("value-strategy")
+                        .required(true)
+                        .help("How to handle values for duplicated keys: first, last, concat")
+                        .default_value("first")
+                        .value_parser(["first", "last", "concat"])
+                )
         )
         .subcommand(
             Command::new("about")

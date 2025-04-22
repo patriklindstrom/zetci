@@ -22,7 +22,7 @@ use std::error::Error;
 use std::{env, process};
 
 fn perform_operation(
-    operation: fn(Vec<&String>) -> Result<HashMap<String, String>, Box<dyn Error>>,
+    operation: impl FnOnce(Vec<&String>) -> Result<HashMap<String, String>, Box<dyn Error>>,
     operation_name: &str,
     files: Vec<&String>,
 ) {
@@ -93,7 +93,16 @@ fn main() {
                 perform_operation(perform_diffa, "Difference", files_vec.clone());
             }
             Some(("xor", sub_matches)) => {
-                perform_operation(perform_xor, "Xor", files_vec.clone());
+                let strategy = sub_matches
+                    .get_one::<String>("value-strategy")
+                    .map(|s| s.as_str())
+                    .unwrap_or("first");
+                
+                perform_operation(
+                    |files| perform_xor(files, strategy),
+                    "Xor",
+                    files_vec.clone()
+                );
             }
             _ => println!("No valid subcommand was used"),
         }
