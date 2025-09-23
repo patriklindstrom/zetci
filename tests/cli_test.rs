@@ -46,6 +46,22 @@ fn test_xor_command_with_strategy() -> Result<(), Box<dyn Error>> {
 
     Ok(())
 }
+#[test]
+fn test_leftjoin_command() -> Result<(), Box<dyn std::error::Error>> {
+    let mut cmd = Command::cargo_bin("zetci")?;
+    cmd.args([
+        "leftjoin",
+        "--files",
+        "./testdata/fee.csv",
+        "./testdata/foo.csv"
+    ]);
+
+    cmd.assert()
+        .success()
+        .stdout(predicate::str::contains("LeftJoin result"));
+
+    Ok(())
+}
 
 #[test]
 fn test_about_command() -> Result<(), Box<dyn Error>> {

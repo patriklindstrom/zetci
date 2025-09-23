@@ -36,6 +36,12 @@ pub fn cli() -> Command {
                 .author("Patrik Lindström <patrik.lindstrom@lcube.se>")
         )
         .subcommand(
+            Command::new("leftjoin")
+                .about("Performs a left join between the first file and the others based on key")
+                .version("1.0")
+                .author("Patrik Lindström <patrik.lindstrom@lcube.se>")
+        )
+        .subcommand(
             Command::new("diffa")
                 .about("Performs difference operation on csv files")
                 .version("1.0")
@@ -54,12 +60,13 @@ pub fn cli() -> Command {
                         .help("How to handle values for duplicated keys: first, last, concat")
                         .default_value("first")
                         .value_parser(["first", "last", "concat"])
-                )
-        )
+                ))
+
         .subcommand(
             Command::new("about")
                 .about("Displays the logo")
                 .version("1.0")
                 .author("Patrik Lindström <patrik.lindstrom@lcube.se>"),
+
         )
 }

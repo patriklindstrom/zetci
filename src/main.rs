@@ -17,6 +17,8 @@ use set_operations::diffa::perform_diffa;
 use set_operations::intersect::perform_intersect;
 use set_operations::union::perform_union;
 use set_operations::xor::perform_xor;
+use set_operations::left_join::perform_left_join;
+
 use std::collections::HashMap;
 use std::error::Error;
 use std::{env, process};
@@ -102,8 +104,13 @@ fn main() {
                     |files| perform_xor(files, strategy),
                     "Xor",
                     files_vec.clone()
-                );
+                )
+                ;
             }
+            Some(("leftjoin", sub_matches)) => {
+                perform_operation(perform_left_join, "LeftJoin", files_vec.clone());
+            }
+
             _ => println!("No valid subcommand was used"),
         }
     }

@@ -6,7 +6,7 @@ use zetci::set_operations::intersect::perform_intersect;
 use zetci::set_operations::union::perform_union;
 use zetci::set_operations::diffa::perform_diffa;
 use zetci::set_operations::xor::perform_xor;
-
+use zetci::set_operations::left_join::perform_left_join;
 #[test]
 fn test_perform_union() {
     let files = vec!["./testdata/fee.csv","./testdata/foo.csv", "./testdata/fum.csv"]
@@ -220,4 +220,18 @@ fn test_perform_xor_four_sets() {
         );
     }
 
+    #[test]
+    fn test_perform_left_join() {
+        let files = vec!["./testdata/fee.csv", "./testdata/foo.csv"]
+            .iter()
+            .map(|&s| s.to_string())
+            .collect::<Vec<String>>();
+        let files_ref = files.iter().collect::<Vec<&String>>();
 
+        let result = perform_left_join(files_ref).unwrap();
+
+        // Fee.csv has key "4" and so does foo.csv → joined
+        assert!(result.get("4").unwrap().contains(",Olle,Lindström"));
+        // Fee.csv has "7", not in foo.csv → ends with comma
+        assert!(result.get("7").unwrap().ends_with(','));
+    }
