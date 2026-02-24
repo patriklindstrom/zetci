@@ -1,4 +1,4 @@
-use criterion::{criterion_group, criterion_main, Criterion, BatchSize, black_box};
+use criterion::{criterion_group, criterion_main, Criterion, BatchSize};
 use tempfile::tempdir;
 use zetci::set_operations::{union::perform_union, intersect::perform_intersect, diffa::perform_diffa, xor::perform_xor};
 
@@ -9,7 +9,7 @@ mod tests_support;
 use tests_support::gen::{write_csv, GenCfg};
 
 
-fn synth_pair(rows: u64) -> (String, String) {
+fn synth_pair(rows: u64) -> (tempfile::TempDir, String, String) {
     let dir = tempdir().unwrap();
     let f1 = dir.path().join("a.csv");
     let f2 = dir.path().join("b.csv");
@@ -21,7 +21,7 @@ fn synth_pair(rows: u64) -> (String, String) {
         rows, key_start: rows/2, dup_prob: 0.0, conflict_prob: 0.05, long_field_prob: 0.0, unicode: false, crlf: false, seed: 2
     }).unwrap();
 
-    (f1.to_string_lossy().to_string(), f2.to_string_lossy().to_string())
+    (dir, f1.to_string_lossy().to_string(), f2.to_string_lossy().to_string())
 }
 
 fn bench_ops(c: &mut Criterion) {
@@ -30,10 +30,10 @@ fn bench_ops(c: &mut Criterion) {
         g.bench_function(format!("union_{}", rows), |b| {
             b.iter_batched(
                 || {
-                    let (a,b) = synth_pair(rows);
-                    vec![a,b]
+                    let (dir, a, b) = synth_pair(rows);
+                    (dir, vec![a, b])
                 },
-                |files| {
+                |(dir, files)| {
                     let refs: Vec<&String> = files.iter().collect();
                     let _ = perform_union(refs).unwrap();
                 },
@@ -44,10 +44,10 @@ fn bench_ops(c: &mut Criterion) {
         g.bench_function(format!("intersect_{}", rows), |b| {
             b.iter_batched(
                 || {
-                    let (a,b) = synth_pair(rows);
-                    vec![a,b]
+                    let (dir, a, b) = synth_pair(rows);
+                    (dir, vec![a, b])
                 },
-                |files| {
+                |(dir, files)| {
                     let refs: Vec<&String> = files.iter().collect();
                     let _ = perform_intersect(refs).unwrap();
                 },
@@ -58,10 +58,10 @@ fn bench_ops(c: &mut Criterion) {
         g.bench_function(format!("diffa_{}", rows), |b| {
             b.iter_batched(
                 || {
-                    let (a,b) = synth_pair(rows);
-                    vec![a,b]
+                    let (dir, a, b) = synth_pair(rows);
+                    (dir, vec![a, b])
                 },
-                |files| {
+                |(dir, files)| {
                     let refs: Vec<&String> = files.iter().collect();
                     let _ = perform_diffa(refs).unwrap();
                 },
@@ -72,19 +72,18 @@ fn bench_ops(c: &mut Criterion) {
         g.bench_function(format!("xor_{}", rows), |b| {
             b.iter_batched(
                 || {
-                    let (a,b) = synth_pair(rows);
-                    vec![a,b]
+                    let (dir, a, b) = synth_pair(rows);
+                    (dir, vec![a, b])
                 },
-                |files| {
+                |(dir, files)| {
                     let refs: Vec<&String> = files.iter().collect();
-                    let _ = perform_xor(refs).unwrap();
+                    let _ = perform_xor(refs, "first").unwrap();
                 },
                 BatchSize::LargeInput,
             )
         });
-    }
-    g.finish();
+    } // Close the for loop here
+    g.finish(); // Finish the benchmark group
 }
-
 criterion_group!(benches, bench_ops);
 criterion_main!(benches);

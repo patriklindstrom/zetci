@@ -1,4 +1,4 @@
-use rand::{rngs::StdRng, Rng, SeedableRng};
+use rand::{rngs::StdRng, Rng, SeedableRng, RngExt}; // Add RngExt here
 use std::fs::File;
 use std::io::{BufWriter, Write};
 use std::path::Path;
@@ -39,38 +39,41 @@ fn synth_row(
     const BRAND: &[&str] = &["Nike","Adidas","Bare","Na","Tass","Sandal","Puma","Asics"];
     const DIST:  &[&str] = &["500 m","1000 m","2000 m","3000 m","6000 m"];
 
-    let choose = |arr: &[&str]| arr[rng.gen_range(0..arr.len())].to_string();
+    // Use a helper function instead of a closure to avoid borrow issues
+    fn choose(rng: &mut StdRng, arr: &[&str]) -> String {
+        arr[rng.random_range(0..arr.len())].to_string()
+    }
 
-    let mut first = choose(FIRST);
-    let mut last  = choose(LAST);
-    let mut dist  = choose(DIST);
-    let mut time  = format!("{} min {} s", rng.gen_range(3..30), rng.gen_range(0..60));
-    let mut brand = choose(BRAND);
+    let mut first = choose(rng, FIRST);
+    let mut last  = choose(rng, LAST);
+    let mut dist  = choose(rng, DIST);
+    let mut time  = format!("{} min {} s", rng.random_range(3..30), rng.random_range(0..60));
+    let mut brand = choose(rng, BRAND);
 
-    // occasional long fields
-    let maybe_make_long = |s: &mut String, label: &str| {
-        if rng.gen::<f32>() < long_field_prob {
+    // occasional long fields - use a helper function instead of closure
+    fn maybe_make_long(rng: &mut StdRng, s: &mut String, label: &str, long_field_prob: f32) {
+        if rng.random::<f32>() < long_field_prob {
             s.push_str(&"X".repeat(8_000)); // ~8 KB field to push CSV/IO
             s.push_str(label);
         }
-    };
+    }
 
-    maybe_make_long(&mut first, "F");
-    maybe_make_long(&mut last,  "L");
-    maybe_make_long(&mut brand, "B");
+    maybe_make_long(rng, &mut first, "F", long_field_prob);
+    maybe_make_long(rng, &mut last,  "L", long_field_prob);
+    maybe_make_long(rng, &mut brand, "B", long_field_prob);
 
     // unicode sprinkle
     if unicode {
         let unicodes = ["Å", "Ä", "Ö", "é", "ß", "—", "猫", "🐟", "🙂"];
-        if rng.gen::<bool>() { first.push_str(unicodes[rng.gen_range(0..unicodes.len())]); }
-        if rng.gen::<bool>() { last.push_str(unicodes[rng.gen_range(0..unicodes.len())]); }
+        if rng.random::<bool>() { first.push_str(unicodes[rng.random_range(0..unicodes.len())]); }
+        if rng.random::<bool>() { last.push_str(unicodes[rng.random_range(0..unicodes.len())]); }
     }
 
     // value conflict knob: if true, nudge fields so same key can differ across files
     if conflict {
-        if rng.gen::<bool>() { brand.push_str("-X"); }
-        if rng.gen::<bool>() { dist = format!("{} m", 500 * rng.gen_range(1..16)); }
-        if rng.gen::<bool>() { time = format!("{} min {} s", rng.gen_range(3..40), rng.gen_range(0..60)); }
+        if rng.random::<bool>() { brand.push_str("-X"); }
+        if rng.random::<bool>() { dist = format!("{} m", 500 * rng.random_range(1..16)); }
+        if rng.random::<bool>() { time = format!("{} min {} s", rng.random_range(3..40), rng.random_range(0..60)); }
     }
 
     vec![
@@ -86,7 +89,7 @@ fn synth_row(
 pub fn write_csv<P: AsRef<Path>>(path: P, cfg: GenCfg) -> std::io::Result<()> {
     let file = File::create(path)?;
     let mut w = BufWriter::new(file);
-    let mut rng = StdRng::from_seed(cfg.seed.to_le_bytes());
+    let mut rng = StdRng::seed_from_u64(cfg.seed);
 
     // for duplicate generation we will keep a small ring buffer of recent keys
     const RING: usize = 1024;
@@ -95,11 +98,13 @@ pub fn write_csv<P: AsRef<Path>>(path: P, cfg: GenCfg) -> std::io::Result<()> {
     for i in 0..cfg.rows {
         let mut key = cfg.key_start + i;
 
-        if !recent.is_empty() && rng.gen::<f32>() < cfg.dup_prob {
-            key = *recent.get(rng.gen_range(0..recent.len())).unwrap();
+        if !recent.is_empty() && rng.random::<f32>() < cfg.dup_prob {
+            key = *recent.get(rng.random_range(0..recent.len())).unwrap();
         }
 
-        let row = synth_row(&mut rng, key, rng.gen::<f32>() < cfg.conflict_prob, cfg.unicode, cfg.long_field_prob);
+        // Evaluate conflict probability BEFORE calling synth_row to avoid simultaneous mutable borrows
+        let is_conflict = rng.random::<f32>() < cfg.conflict_prob;
+        let row = synth_row(&mut rng, key, is_conflict, cfg.unicode, cfg.long_field_prob);
         // NB: values can contain commas/Unicode—csv crate in *reader* handles quoting.
         // To keep generation simple and fast, we won't add quotes here; fields themselves avoid commas.
 

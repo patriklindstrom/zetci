@@ -1,4 +1,4 @@
-use clap::{crate_version, Arg, Command, arg};
+use clap::{crate_version, Arg, Command};
 pub fn cli() -> Command {
     Command::new("set_operations")
         .version(crate_version!())
